@@ -1,6 +1,6 @@
 // La mise en forme de la bannière de recherche
 
-class searchBanner {
+class SearchBanner {
 
     constructor() {
         
@@ -22,4 +22,4 @@ class searchBanner {
     }
 }
 
-export {searchBanner}
+export {SearchBanner}
