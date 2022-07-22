@@ -150,3 +150,125 @@ label {
     top: -20px;
     transform: rotate(180deg);
 } 
+
+.gallery-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 85px;
+    width: 1240px;
+    margin-left: 60px;
+}
+
+.recipe-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 364px;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 5px;
+    margin-bottom: 50px;    
+}
+
+.recipe-photo {
+    height: 178px;
+    width: 380px;
+}
+
+.details-recipe {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: 380px;
+    height: 172px;
+    margin: 0;
+    padding: 5px 20px;
+    gap: 20px;
+    background-color: #E7E7E7;
+}
+
+.recipe-header, .recipe-infos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.recipe-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    margin-top: 0;
+}
+
+h2, h3 {
+    font-family: "Lato";
+    font-style: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+
+h2 {
+    font-weight: 400;
+    margin-right: 3px;
+}
+
+h3 {
+    font-weight: 700;
+}
+
+i {
+    height: 20px;
+    width: 20px;
+    margin-right: 3px;
+}
+
+.recipe-infos {
+    gap: 10px;
+    position: relative;
+    width: 380px;
+    height: 186px;
+    border-radius: 5px;
+    
+}
+.recipe-ingredients {
+    width: 60%;
+    margin-top: 0;
+    list-style-type: none;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000000;
+    text-indent: -40px;
+}
+
+.descriptions {
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 60%;
+    height: 109px;
+    white-space: wrap;
+    margin-bottom: 15px;
+    margin-right: 35px;
+    font-size: 12px;
+    font-family: "Roboto";
+    font-weight: 400;
+    word-wrap: break-word;
+}
+

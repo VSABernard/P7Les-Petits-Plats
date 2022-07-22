@@ -1,4 +1,4 @@
-
+// La mise en place des filtres
 class FilterCard {
     constructor() {
         this.$filter = document.createElement('section')
