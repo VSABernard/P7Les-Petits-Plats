@@ -11,17 +11,26 @@ class RecipeCard {
     createRecipesCard() {
 
         let ingredientCard = ''
-        
-        this._recipe.ingredients.forEach(ingredient => {
-            // let unit = ''
-            
-            // if(ingredient.unit != undefined){
-            //     unit = ingredient.unit
-            // }
+        // Couper les textes longues dans la description
+        let shortDescription = this._recipe.description.slice(0,158) + '...'
 
-            ingredientCard += `<li>${ingredient.ingredient}`
-            ingredientCard += `${ingredient.quantity || ingredient.unit ? ':' : ''} `
-            ingredientCard += `${ingredient.quantity ? ingredient.quantity : ''} ${ingredient.unit ? ingredient.unit : ''}</li>`
+        this._recipe.ingredients.forEach(ingredient => {
+            
+            // Conversion les unités des ingrédients
+            let unit = ingredient.unit
+            if(ingredient.unit === 'grammes') {
+                unit = 'g'
+            } 
+            if(ingredient.unit === 'cuillères à soupe') {
+                unit = 'cuillères'
+            }
+            if(ingredient.unit === 'cuillère à soupe') {
+                unit = 'cuillère'
+            }
+
+            ingredientCard += `<li><strong>${ingredient.ingredient}</strong>`
+            ingredientCard += `<strong>${ingredient.quantity || unit ? ':' : ''}</strong> `
+            ingredientCard += ` ${ingredient.quantity ? ingredient.quantity : ''} ${unit ? unit : ''}</li>`
         })
        
 
@@ -32,13 +41,13 @@ class RecipeCard {
             <article class="details-recipe">
                 <header class="recipe-header">
                     <h2>${this._recipe.name}<h2>
-                    <h3><i class="fa-regular fa-clock"></i>${this._recipe.time} min</h3>    
+                    <p><i class="fa-regular fa-clock"></i>${this._recipe.time} min</p>    
                 </header>  
                 <div class="recipe-infos">
                     <ul class="recipe-ingredients">
                     ${ingredientCard}
                     </ul>
-                    <aside class="descriptions">${this._recipe.description}</aside>
+                    <span class="descriptions">${shortDescription}</span>
                 </div>      
             </article>
         </section>

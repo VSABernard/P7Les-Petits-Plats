@@ -1,3 +1,5 @@
+import { recipes } from '../data/recipes.js'
+
 class Api {
     constructor() {    
     }

@@ -1,4 +1,4 @@
-const recipes = [
+export const recipes = [
     {
         "id": 1,
         "name" : "Limonade de Coco",
@@ -456,7 +456,7 @@ const recipes = [
             {
                 "ingredient": "huile d'olive",
                 "quantity": 2,
-                "unit": "cuillère à soupe"
+                "unit": "cuillères à soupe"
             }
         ],
         "time":40,
@@ -571,7 +571,7 @@ const recipes = [
             {
                 "ingredient": "huile d'olives",
                 "quantity": 2,
-                "unit": "cuillère à soupe"
+                "unit": "cuillères à soupe"
             }
         ],
         "time": 45,
@@ -697,7 +697,7 @@ const recipes = [
             {
                 "ingredient": "huile d'olive",
                 "quantity": 1,
-                "unit": "cuillères à soupe"
+                "unit": "cuillère à soupe"
             }
         ],
         "time": 30,
@@ -737,7 +737,7 @@ const recipes = [
             {
                 "ingredient": "Crème Fraiche",
                 "quantity" : 1,
-                "unit": "cuillères à soupe"
+                "unit": "cuillère à soupe"
             }
         ],
         "time": 30,
@@ -941,7 +941,7 @@ const recipes = [
             {
                 "ingredient": "Crème fraîche",
                 "quantity": 4,
-                "unit": "cuillère à soupe"
+                "unit": "cuillères à soupe"
             },
             {
                 "ingredient": "Vermicelles",
@@ -1152,7 +1152,7 @@ const recipes = [
             {
                 "ingredient": "Jus de citron",
                 "quantity": 1,
-                "unit": "cuillères à soupe"
+                "unit": "cuillère à soupe"
             }
         ],
         "time": 5,
@@ -1214,7 +1214,7 @@ const recipes = [
             {
                 "ingredient": "Cumin",
                 "quantity": 1,
-                "unit": "cuillères à café"
+                "unit": "cuillère à café"
             },
             {
                 "ingredient": "Noix de muscade",
@@ -1258,7 +1258,7 @@ const recipes = [
             {
                 "ingredient": "Maïzena",
                 "quantity": 1,
-                "unit": "cuillères à soupe"
+                "unit": "cuillère à soupe"
             }
         ],
         "time": 35,
@@ -1388,7 +1388,7 @@ const recipes = [
             {
                 "ingredient": "Bicarbonate",
                 "quantity": 1,
-                "unit": "cuillères à café"
+                "unit": "cuillère à café"
             }
         ],
         "time": 10,

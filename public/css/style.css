@@ -193,10 +193,9 @@ label {
     flex-direction: column;
     justify-content: flex-start;
     max-width: 380px;
-    height: 172px;
+    height: 186px;
     margin: 0;
-    padding: 5px 20px;
-    gap: 20px;
+    padding: 5px 10px;
     background-color: #E7E7E7;
 }
 
@@ -211,10 +210,11 @@ label {
     flex-direction: row;
     justify-content: space-between;
     height: 40px;
-    margin-top: 0;
+    margin: 0;
+    gap: 90px;
 }
 
-h2, h3 {
+h2, .recipe-header p {
     font-family: "Lato";
     font-style: normal;
     font-size: 18px;
@@ -223,11 +223,20 @@ h2, h3 {
 }
 
 h2 {
+     
     font-weight: 400;
-    margin-right: 3px;
+    margin-right: 10px;
 }
 
-h3 {
+aside {
+    height: 300px;
+}
+
+.recipe-header p {
+    position: absolute;
+    width: 80px;
+    margin-top: 0;
+    margin-left: -70px;
     font-weight: 700;
 }
 
@@ -238,20 +247,21 @@ i {
 }
 
 .recipe-infos {
-    gap: 10px;
     position: relative;
     width: 380px;
     height: 186px;
     border-radius: 5px;
-    
+    margin-top: 25px;
+    padding-left: 40px;
 }
 .recipe-ingredients {
-    width: 60%;
+    width: 171px;
+    height: auto;
     margin-top: 0;
+    padding: 0;
     list-style-type: none;
     font-family: 'Lato';
     font-style: normal;
-    font-weight: 700;
     font-size: 12px;
     line-height: 14px;
     color: #000000;
@@ -259,16 +269,11 @@ i {
 }
 
 .descriptions {
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    width: 60%;
-    height: 109px;
-    white-space: wrap;
+    width: 171px;
+    max-height: 109px;
     margin-bottom: 15px;
-    margin-right: 35px;
+    margin-right: 60px;
     font-size: 12px;
     font-family: "Roboto";
     font-weight: 400;
-    word-wrap: break-word;
 }
-
