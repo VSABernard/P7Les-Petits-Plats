@@ -40,8 +40,8 @@ class RecipeCard {
             <img class="recipe-photo" src='../public/assets/imgRecipe.svg' aria-modal="true" aria-hidden="true" alt="Recipe's image">
             <article class="details-recipe">
                 <header class="recipe-header">
-                    <h2>${this._recipe.name}<h2>
-                    <p><i class="fa-regular fa-clock"></i>${this._recipe.time} min</p>    
+                    <div class="recipe-title">${this._recipe.name}</div>
+                    <div class="recipe-timer"><i class="fa-regular fa-clock"></i>${this._recipe.time} min</div>    
                 </header>  
                 <div class="recipe-infos">
                     <ul class="recipe-ingredients">

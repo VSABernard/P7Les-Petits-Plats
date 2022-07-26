@@ -211,10 +211,9 @@ label {
     justify-content: space-between;
     height: 40px;
     margin: 0;
-    gap: 90px;
 }
 
-h2, .recipe-header p {
+.recipe-title, .recipe-timer {
     font-family: "Lato";
     font-style: normal;
     font-size: 18px;
@@ -222,21 +221,22 @@ h2, .recipe-header p {
     color: #000000;
 }
 
-h2 {
-     
+.recipe-title {
+    position: relative;
     font-weight: 400;
-    margin-right: 10px;
+    width: 275px;
+    margin-right: 50px;
+    word-break: inherit;
 }
 
 aside {
     height: 300px;
 }
 
-.recipe-header p {
+.recipe-timer {
     position: absolute;
-    width: 80px;
-    margin-top: 0;
-    margin-left: -70px;
+    justify-content: flex-end;
+    margin-left: 280px;
     font-weight: 700;
 }
 

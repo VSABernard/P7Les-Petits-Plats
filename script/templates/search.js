@@ -17,8 +17,8 @@ class SearchBanner {
             <img src="./public/assets/search.svg" class="input-icon" alt="icone de recherche">
         </button>`
 
-            $wrapperSearch.innerHTML = searchForm
-            return $wrapperSearch
+        $wrapperSearch.innerHTML = searchForm
+        return $wrapperSearch
     }
 }
 
