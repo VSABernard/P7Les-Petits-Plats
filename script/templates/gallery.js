@@ -43,12 +43,12 @@ class RecipeCard {
                     <div class="recipe-title">${this._recipe.name}</div>
                     <div class="recipe-timer"><i class="fa-regular fa-clock"></i>${this._recipe.time} min</div>    
                 </header>  
-                <div class="recipe-infos">
+                <article class="recipe-infos">
                     <ul class="recipe-ingredients">
                     ${ingredientCard}
                     </ul>
                     <span class="descriptions">${shortDescription}</span>
-                </div>      
+                </article>      
             </article>
         </section>
         `

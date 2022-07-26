@@ -158,7 +158,9 @@ label {
     flex-wrap: wrap;
     row-gap: 85px;
     width: 1240px;
+    margin-top: 30px;
     margin-left: 60px;
+    border-radius: 5px;
 }
 
 .recipe-list {
@@ -172,7 +174,7 @@ label {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
-    border-radius: 0.25rem;
+    border-radius: 5px;
 }
 
 .recipe-card {
@@ -186,6 +188,8 @@ label {
 .recipe-photo {
     height: 178px;
     width: 380px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .details-recipe {
@@ -195,8 +199,10 @@ label {
     max-width: 380px;
     height: 186px;
     margin: 0;
-    padding: 5px 10px;
+    padding-left: 10px;
     background-color: #E7E7E7;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .recipe-header, .recipe-infos {
@@ -210,7 +216,7 @@ label {
     flex-direction: row;
     justify-content: space-between;
     height: 40px;
-    margin: 0;
+    margin-top: 10px;
 }
 
 .recipe-title, .recipe-timer {
@@ -251,7 +257,7 @@ i {
     width: 380px;
     height: 186px;
     border-radius: 5px;
-    margin-top: 25px;
+    margin-top: 15px;
     padding-left: 40px;
 }
 .recipe-ingredients {

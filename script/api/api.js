@@ -21,18 +21,57 @@ class Api {
     async getRecipes() {
 
         for(let recipe of recipes){
+            // console.log('recipe : ' + JSON.stringify(recipe))
+            // console.log('id : ' + recipe.id)
+            // console.log('name : ' + recipe.name)
+        }
+
+        recipes.map(({id, name}) => {
+            // console.log('id: ' + id)
+            // console.log('name: '+ name)
+        })   
+
+        return recipes
+    }
+
+    /**
+     * Renvoyer la liste des recettes comportant le mot clé spécifique 
+     * La recherche se fait sur le titre, les ingrédients, la description
+     * @param keyword : le mot clé
+     * @return liste des recettes
+     */
+
+    async getRecipesByKeyword(keyword) {
+
+        let recipesWithKeyword = []
+
+        recipesWithKeyword = recipes.filter((recipe) => {
+            const name = recipe.name
+            const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
+            
+
+            if(indexOnName != -1) {
+                return true
+            } else {
+                return false
+            }
+
+
+
+        })
+
+        for(let recipe of recipesWithKeyword){
             console.log('recipe : ' + JSON.stringify(recipe))
             console.log('id : ' + recipe.id)
             console.log('name : ' + recipe.name)
         }
 
-        recipes.map(({id, name}) => {
-            console.log('id: ' + id)
-            console.log('name: '+ name)
-        })   
-
-        return recipes
+        return recipesWithKeyword
     }
+
+
+
+
 
     /**
      * Renvoyer la liste des ingredients
