@@ -14,18 +14,18 @@ class FilterCard {
 
         const filterBlock = `
             <section class="filters">
-                <section id="ingredient">
+                <button id="ingredient">
                     <p>Ingredients</p>
                     <i class="fa-solid fa-chevron-down" id="chevron"></i>
-                </section>
-                <section id="appliance">
+                </button>
+                <button id="appliance">
                     <p>Appareils</p>
                     <i class="fa-solid fa-chevron-down" id="chevron"></i>
-                </section>    
-                <section id="ustensil">
+                </button>    
+                <button id="ustensil">
                     <p>Ustensiles</p>
                     <i class="fa-solid fa-chevron-down" id="chevron"></i>
-                </section>
+                </button>
             </section>
         `
         this.$filter.innerHTML = filterBlock

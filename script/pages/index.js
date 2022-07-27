@@ -13,7 +13,7 @@ class MainApp {
         this.$galleryWrapper = document.querySelector('.gallery-section')
     }
 
-   /**
+    /**
      * Initiation de la page d'acceuil
      * Affichage de toutes les recettes
      * Alimentation des recerches spécialisées
@@ -36,29 +36,26 @@ class MainApp {
 
         // La mise en place la section des filtres
         this.displayFilters()   
-        
-        // Ajouter le listener sur le champs de recherche
-        document.querySelector('#search-input').addEventListener('keyup', function(event) {
+    }
 
-            //this fait référence a search input
-            // on perd donc le this de la classe MainApp qui permet
-            // de lancer les méthodes comme this.api ou this.displayRecipes(...)
+    /**
+     * Traitement d'événement de la recherche par mot clé 
+     */
 
-            let search = event.target       
-            let length  = search.value.length        
-            
-            console.log('recherche en cours :' + search.value)
-            console.log('length :' + length)
-            if (length < 3) {
-                return                                          // pas de recherche si la longeur est <3
-            }
-            console.log('lancer la recherche!!!!')
-            
-            let recipesWithKeyword = this.api.getRecipesByKeyword(search.value)
-            this.displayRecipes(recipesWithKeyword)
+    async onSearchByKeyword(event){
+    //this fait référence a search input
+        let search = event.target       
+        let length  = search.value.length        
 
-        })
+        console.log('recherche en cours :' + search.value)
+        console.log('length :' + length)
+        if (length < 3) {
+            return                                          // pas de recherche si la longeur est <3
+        }
+        console.log('lancer la recherche!!!!')
 
+        let recipesWithKeyword = await this.api.getRecipesByKeyword(search.value)
+        this.displayRecipes(recipesWithKeyword)
     }
 
 
@@ -88,6 +85,7 @@ class MainApp {
      * @param recipes
      */
     async displayRecipes(recipes) {
+        
         for (let recipe of recipes) {
             const templateRecipe = new RecipeCard(recipe)
             this.$galleryWrapper.appendChild(
@@ -98,4 +96,16 @@ class MainApp {
 }
 
 const mainApp = new MainApp()
-mainApp.init()
+await mainApp.init()
+
+
+// Ajouter le listener sur le champs de recherche
+let searchInput = document.querySelector('#search-input')
+
+searchInput.addEventListener('keyup',function(event) {
+    console.log('input search')
+    mainApp.onSearchByKeyword(event)
+})
+
+
+
