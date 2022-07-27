@@ -11,12 +11,17 @@ class SearchBanner {
         $wrapperSearch.classList.add('search-wrapper')
 
         const searchForm =`
-        <label for="search" class="search"></label>
-        <input type="text" id="search-input" class="search-bar" placeholder="Rechercher une recette" />
-        <button class="btn-search" type="button">
-            <img src="./public/assets/search.svg" class="input-icon" alt="icone de recherche">
-        </button>`
+        <section class="block-search">
+            <input type="text" id="search-input" class="search-bar" data-error-visible="false" data-succes-visible="false" placeholder="Rechercher une recette" />
+            <button class="btn-search" type="button">
+                <img src="./public/assets/search.svg" class="input-icon" alt="icone de recherche">
+            </button>
+        </section>
+        <section class="error-msg" data-error-visible="true" data-error="Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...">
+        </section>
 
+            `
+        
         $wrapperSearch.innerHTML = searchForm
         return $wrapperSearch
     }

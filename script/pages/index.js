@@ -26,7 +26,7 @@ class MainApp {
         // await this.api.getAppliances()
         // await this.api.getUstensils()
 
-        await this.api.getRecipesByKeyword('Coco')
+        await this.api.getRecipesByKeyword('')
 
         const recipes = await this.api.getRecipes()
         this.displayRecipes(recipes)
@@ -49,7 +49,9 @@ class MainApp {
 
         console.log('recherche en cours :' + search.value)
         console.log('length :' + length)
-        if (length < 3) {
+        if (length < 3) { 
+            const recipes = await this.api.getRecipes() 
+            this.displayRecipes(recipes)                    // afficher la totalité de liste de recettes s'il y a moins de 3 caractères
             return                                          // pas de recherche si la longeur est <3
         }
         console.log('lancer la recherche!!!!')
@@ -85,6 +87,7 @@ class MainApp {
      * @param recipes
      */
     async displayRecipes(recipes) {
+        this.$galleryWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
         
         for (let recipe of recipes) {
             const templateRecipe = new RecipeCard(recipe)
@@ -99,6 +102,7 @@ const mainApp = new MainApp()
 await mainApp.init()
 
 
+
 // Ajouter le listener sur le champs de recherche
 let searchInput = document.querySelector('#search-input')
 
@@ -106,6 +110,4 @@ searchInput.addEventListener('keyup',function(event) {
     console.log('input search')
     mainApp.onSearchByKeyword(event)
 })
-
-
 

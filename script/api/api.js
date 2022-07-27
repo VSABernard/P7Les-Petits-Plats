@@ -47,23 +47,28 @@ class Api {
 
         recipesWithKeyword = recipes.filter((recipe) => {
             const name = recipe.name
+            const ingredients = recipe.ingredients
+            const description = recipe.description
             const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
+            const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
             
-
-            if(indexOnName != -1) {
+            // Récuperer les ingrédients contenant le mot clé
+            const filterIngredients = ingredients.filter(elem => {  
+                return elem.ingredient.toLowerCase().includes(keyword.toLowerCase())                
+            })
+            
+            // Si l'index est différent de -1 alors le mot clé a été trouvé
+            if(indexOnName != -1 || filterIngredients.length > 0 || indexOnDescription != -1) {
                 return true
             } else {
                 return false
             }
-
-
-
         })
 
         for(let recipe of recipesWithKeyword){
-            console.log('recipe : ' + JSON.stringify(recipe))
-            console.log('id : ' + recipe.id)
-            console.log('name : ' + recipe.name)
+            // console.log('recipe : ' + JSON.stringify(recipe))
+            // console.log('id : ' + recipe.id)
+            // console.log('name : ' + recipe.name)
         }
 
         return recipesWithKeyword
