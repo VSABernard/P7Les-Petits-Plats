@@ -25,6 +25,10 @@ header {
     width: 268px;
 }
 
+.logo:hover {
+    transform: scale(1.1);
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -84,7 +88,7 @@ label {
     cursor: pointer;
 }
 
-.tag-section {
+.tag-selected {
     height: 30px;
     width: 1260px;
     margin: 20px 60px;
@@ -95,19 +99,20 @@ label {
     border: 1px solid rgb(204, 194, 194);
 }
 
-.filter-section {
+.tags-section {
+    height: 60px;
     width: 1440px;
     margin: 30px 60px;
 }
 
-.filters {
+.tags {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     gap: 50px;
 }
 
-#ingredient, #appliance, #ustensil {
+#btn-ingredient, #btn-appliance, #btn-ustensil {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -116,22 +121,27 @@ label {
     width: 170px;
     height: 69px;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer;    
+    
 }
 
-#ingredient {
+#btn-ingredient:hover, #btn-appliance:hover, #btn-ustensil:hover {
+    transform : scale(1.1);
+}
+
+#btn-ingredient {
     background-color: #3282F7;
 }
 
-#appliance {
+#btn-appliance {
     background-color: #68D9A4;
 }
 
-#ustensil {
+#btn-ustensil  {
     background-color: #ED6454;
 }
 
-#ingredient p, #appliance p, #ustensil p {
+#btn-ingredient p, #btn-appliance p, #btn-ustensil p {
     width: 90px;
     font-size: 18px;
     font-weight: bold;
@@ -139,20 +149,92 @@ label {
     margin: auto 65px auto 15px;
 }
 
-#chevron {
-    position: relative;
+.fa-chevron-down {
     margin: 25px -40px;
     color: #FAFAFA;
     z-index: 1;
     pointer-events: none;
     width: 16px;
     height: 9.88px;
+    z-index: 0;
 }
 
 #chevron.active {
     top: -20px;
     transform: rotate(180deg);
 } 
+
+#modal-ingredient {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: -70px;
+    padding-top: 20px;
+    gap: 20px;
+    width: 980px;
+    height: 950px;
+    background-color: #3282F7;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+
+.tag-input {
+    background-color: transparent;
+    border: transparent;
+    color: #FFFFFF;
+    text-align: left;
+    width: 500px;
+    height: 30px;
+    margin-left: 35px;
+    opacity: 50%;
+}
+
+.tag-input::placeholder {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: left;
+    color: #FFFFFF;
+    opacity: 0.5;
+    height: 25px;
+    border: none;
+}
+
+
+.list-ingredient {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 40px;
+    margin-top: 35px;
+    height: 900px;
+    width: 900px;
+    background-color: #3282F7;
+    padding: 10px 40px;
+    z-index: 1;
+}
+
+.list-ingredient li {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: #FFFFFF;
+}
+
+#list-appliance, #list-ustensil {
+    display: none;
+}
 
 .gallery-section {
     display: flex;
@@ -175,6 +257,10 @@ label {
     background-clip: border-box;
     border-radius: 5px;
     overflow: hidden;
+}
+
+.recipe-list:hover {
+    transform: scale(1.1);
 }
 
 .recipe-card {
@@ -275,7 +361,7 @@ i {
     text-indent: -40px;
 }
 
-li {
+.recipe-ingredients li {
     margin-left: 40px;
 }
 

@@ -1,7 +1,7 @@
 import { recipes } from '../data/recipes.js'
 
 class Api {
-    constructor() {    
+    constructor() {
     }
 
     /**
@@ -13,7 +13,7 @@ class Api {
 
     /**
      * Renvoyer la liste des recettes
-     * @param 
+     * @param
      * @return liste des recettes
      * https://contactmentor.com/javascript-map-array-of-objects/
      */
@@ -29,13 +29,13 @@ class Api {
         recipes.map(({id, name}) => {
             // console.log('id: ' + id)
             // console.log('name: '+ name)
-        })   
+        })
 
         return recipes
     }
 
     /**
-     * Renvoyer la liste des recettes comportant le mot clé spécifique 
+     * Renvoyer la liste des recettes comportant le mot clé spécifique
      * La recherche se fait sur le titre, les ingrédients, la description
      * @param keyword : le mot clé
      * @return liste des recettes
@@ -45,18 +45,21 @@ class Api {
 
         let recipesWithKeyword = []
 
+        // -------------------------------------------------------------------------
+        // Traiter les tableaux de données avec la méthode de l'objet array "FILTER"
+        // -------------------------------------------------------------------------
         recipesWithKeyword = recipes.filter((recipe) => {
             const name = recipe.name
             const ingredients = recipe.ingredients
             const description = recipe.description
             const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
             const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
-            
-            // Récuperer les ingrédients contenant le mot clé
-            const filterIngredients = ingredients.filter(elem => {  
-                return elem.ingredient.toLowerCase().includes(keyword.toLowerCase())                
+
+            // Récuperer les ingrédients contenant le mot clé avec la méthode de l'objet array "FILTER"
+            const filterIngredients = ingredients.filter(elem => {
+                return elem.ingredient.toLowerCase().includes(keyword.toLowerCase())                        //La méthode includes() permet de déterminer si un tableau contient une valeur et renvoie true si c'est le cas, false sinon.
             })
-            
+
             // Si l'index est différent de -1 alors le mot clé a été trouvé
             if(indexOnName != -1 || filterIngredients.length > 0 || indexOnDescription != -1) {
                 return true
@@ -74,49 +77,82 @@ class Api {
         return recipesWithKeyword
     }
 
-
-
-
-
     /**
      * Renvoyer la liste des ingredients
-     * @param 
-     * @return liste d'ingrédients
-     * https://contactmentor.com/javascript-map-array-of-objects/
+     * @param
+     * @return tableau d'ingrédients
      */
     async getIngredients() {
-        recipes.map(({ingredients}) => { 
-            ingredients.map(({ingredient}) =>{
-                console.log('ingredient: '+ ingredient)
+        let ingredients = []
+        const comparatorIngredient = (a,b) => {                                         // Trier la liste par l'ordre alphabetique
+            return a.localeCompare(b)                                                   // Ignorer les accents lors de tri
+        }
+
+        recipes.map((recipe) => {
+            recipe.ingredients.map((elem) =>{
+                if (!ingredients.includes(elem.ingredient)) {                           
+                    ingredients.push(elem.ingredient)                                   // Rajouter un élémet dans un tableau
+                }
             })
         })
-    }
 
+        ingredients.sort(comparatorIngredient)
+        console.log('ingredient :')
+        console.table(ingredients)
+
+        return ingredients
+    }
+    
     /**
      * Renvoyer la liste des appareils
-     * @param 
-     * @return liste d'appareils
-     * https://contactmentor.com/javascript-map-array-of-objects/
+     * @param
+     * @return tableau d'appareils
      */
     async getAppliances() {
-        recipes.map(({appliance}) => {
-            console.log('appliance: '+ appliance)
+        let appliances = []
+        const comparatorAppliance = (a,b) => {
+            return a.localeCompare(b)
+        }
+
+        recipes.map((recipe) => {
+            if (!appliances.includes(recipe.appliance)) {
+                appliances.push(recipe.appliance)
+            }
+            console.log('appliance: '+ recipe.appliance)
         })
+
+        appliances.sort(comparatorAppliance)
+        console.log('appliances :')
+        console.table(appliances)
+
+        return appliances
     }
 
     /**
      * Renvoyer la liste des ustensiles
-     * @param 
-     * @return liste d'ustensiles
-     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+     * @param
+     * @return tableau des ustensiles
      */
     async getUstensils() {
-        recipes.map(({ustensils}) => {
-            ustensils.forEach(ustensil => 
-                console.log('ustensil: '+ ustensil))
-        })
-    }
+        let ustensils = []
+        const comparatorUstensil = (a,b) => {
+            return a.localeCompare(b)
+        }
 
+        recipes.map((recipe) => {
+            recipe.ustensils.map((ustensil) =>{
+                if (!ustensils.includes(ustensil)) {
+                    ustensils.push(ustensil)
+                }
+            })
+        })
+
+        ustensils.sort(comparatorUstensil)
+        console.log('ustensils :')
+        console.table(ustensils)
+
+        return ustensils
+    }
 }
 
 export {Api}
