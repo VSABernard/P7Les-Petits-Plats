@@ -19,13 +19,14 @@ class MainApp {
      * Affichage de toutes les recettes
      * Alimentation des recerches spécialisées
      */ 
+
     async init() {
         // Appel des méthodes de l'Api
         // await this.api.getTotalReceipes()
         // await this.api.getRecipes()
         await this.api.getIngredients()
-        // await this.api.getAppliances()
-        // await this.api.getUstensils()
+        await this.api.getAppliances()
+        await this.api.getUstensils()
 
         await this.api.getRecipesByKeyword('')
 
@@ -38,9 +39,8 @@ class MainApp {
         // La mise en place la section des tags
         await this.displayTags()   
 
-        // 
+        // La mise à jour des listes de tag
         await this.updateTagsList()
-
     }
 
     /**
@@ -48,7 +48,8 @@ class MainApp {
      */
 
     async onSearchByKeyword(event){
-    //this fait référence a search input
+
+        //this fait référence a search input
         let search = event.target       
         let length  = search.value.length        
 
@@ -65,10 +66,10 @@ class MainApp {
         this.displayRecipes(recipesWithKeyword)
     }
 
-
     /**
      * Afficher la barre de recherche
      */
+
     async displaySearch() {
         const templateSearch = new SearchBanner()
         this.$searchWrapper.appendChild(
@@ -80,6 +81,7 @@ class MainApp {
      * Afficher les tags
      * @param 
      */
+
     async displayTags() {
         this.$tagsCard = new TagsCard()
         this.$tagsWrapper.appendChild(
@@ -91,6 +93,7 @@ class MainApp {
      * Afficher la mise à jour de la liste de tags : ingredients, appareils, ustensiles
      * @param 
      */
+
     async updateTagsList() {
         let ingredients = await this.api.getIngredients()
         this.$tagsCard.updateListIngredients(ingredients)
@@ -100,16 +103,13 @@ class MainApp {
 
         let ustensil = await this.api.getUstensils()
         this.$tagsCard.updateListUstensils(ustensil)
-
     }
-
-
-
 
     /**
      * Afficher la liste des recettes
      * @param recipes
      */
+
     async displayRecipes(recipes) {
         this.$galleryWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
         
@@ -125,14 +125,42 @@ class MainApp {
 const mainApp = new MainApp()
 await mainApp.init()
 
-
-
 // Ajouter le listener sur le champs de recherche
+
 let searchInput = document.querySelector('#search-input')
 
 searchInput.addEventListener('keyup',function(event) {
     console.log('input search')
     mainApp.onSearchByKeyword(event)
 })
+
+// Ajouter le listener sur le champs input dans le tag INGREDIENT
+
+let inputIngredient = document.querySelector('#input-ingredient')
+
+inputIngredient.addEventListener('keyup', function(event) {
+    console.log('input tag')
+    mainApp.onSearchByKeyword(event)
+})
+
+// Ajouter le listener sur le champs input dans le tag APPAREIL
+
+let inputAppliance = document.querySelector('#input-appliance')
+
+inputAppliance.addEventListener('keyup', function(event) {
+    console.log('input tag')
+    mainApp.onSearchByKeyword(event)
+})
+
+// Ajouter le listener sur le champs input dans le tag USTENSILES
+
+let inputUstensil = document.querySelector('#input-ustensil')
+
+inputUstensil.addEventListener('keyup', function(event) {
+    console.log('input tag')
+    mainApp.onSearchByKeyword(event)
+})
+
+
 
 export { MainApp }

@@ -1,4 +1,4 @@
-
+import { MainApp } from '../pages/index.js'
 
 // La mise en place des filtres
 class TagsCard {
@@ -62,6 +62,7 @@ class TagsCard {
     }
 
     // Mettre à jour la liste de tags de l'ingredient
+
     updateListIngredients(ingredients) {
         const listIngredient = document.querySelector('#list-ingredient')
 
@@ -73,6 +74,7 @@ class TagsCard {
     }
 
     // Mettre à jour la liste de tags de l'appareil
+
     updateListAppliances(appliances) {
         const listAppliance = document.querySelector('#list-appliance')
 
@@ -84,6 +86,7 @@ class TagsCard {
     }
 
     // Mettre à jour la liste de tags de l'ustensile
+    
     updateListUstensils(ustensils) {
         const listUstensil = document.querySelector('#list-ustensil')
 
@@ -93,8 +96,7 @@ class TagsCard {
             listUstensil.appendChild(li)        
         })
     }
-
-
 }
+
 
 export { TagsCard }

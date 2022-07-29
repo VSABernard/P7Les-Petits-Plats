@@ -2,8 +2,7 @@
 
 class SearchBanner {
 
-    constructor() {
-        
+    constructor() {        
     }
 
     createSearchBanner() {
@@ -18,9 +17,7 @@ class SearchBanner {
             </button>
         </section>
         <section class="error-msg" data-error-visible="true" data-error="Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...">
-        </section>
-
-            `
+        </section> `
         
         $wrapperSearch.innerHTML = searchForm
         return $wrapperSearch

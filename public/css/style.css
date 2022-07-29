@@ -158,28 +158,12 @@ label {
     height: 9.88px;
 }
 
-.close-tag {
-    position: absolute;
-    align-self: flex-end;
-    margin-right: 20px;
-    background-color: transparent;
-    border: transparent;
-    color: #FAFAFA;
-    z-index: 1;
-    width: 16px;
-    height: 20px;
-    cursor: pointer;
-}
-
-/* #chevron.active {
-    top: -20px;
-    transform: rotate(180deg);
-}  */
+/* BLOCK TAG */
 
 .modal-section {
     position: absolute;
     display: none;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     border-radius: 5px;
     z-index: 1;
@@ -188,28 +172,27 @@ label {
 #modal-ingredient {    
     margin-top: -70px;
     padding-top: 20px;
-    gap: 20px;
-    width: 980px;
-    height: 950px;
-    background-color: #3282F7;    
+    width: 700px;
+    height: 2000px;
+    background-color: #3282F7;   
+    border-radius: 5px; 
 }
 
 #modal-appliance {    
     margin-top: -70px;
     padding-top: 20px;
-    width: 400px;
-    height: 280px;
+    width: 485px;
+    height: 250px;
     background-color: #68D9A4;    
 }
 
 #modal-ustensil {    
     margin-top: -70px;
     padding-top: 20px;
-    width: 450px;
-    height: 470px;
+    width: 580px;
+    height: 490px;
     background-color:#ED6454;    
 }
-
 
 .tag-input {
     background-color: transparent;
@@ -227,7 +210,7 @@ label {
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 20px;
     text-align: left;
     color: #FFFFFF;
     opacity: 0.5;
@@ -235,43 +218,58 @@ label {
     border: none;
 }
 
+.close-tag {
+    position: relative;
+    background-color: transparent;
+    border: transparent;
+    color: #FAFAFA; 
+    z-index: 1;
+    width: 16px;
+    height: 20px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.close-tag:hover {
+    transform: scale(1.2);
+}
+
 .ul-tag { 
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    column-gap: 40px;
-    margin-top: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 50px;
+    margin-top: 40px;
+    margin-left: 0;
+    padding-left: 20px;
     z-index: 1;
 }
 
 #list-ingredient {
-    height: 900px;
-    width: 900px;
+    width: 660px;
     background-color: #3282F7;
-    padding: 10px 40px;
+    border-radius: 5px;
 }
 
 #list-appliance {
-    height: 200px;
-    width: 200px;
+    width: 460px;
     background-color: #68D9A4;
-    margin-left: 10px;
-    padding: 10px 20px;
+    border-radius: 5px;
+    grid-column-gap: 20px;
 }
 
 #list-ustensil {
-    height: 400px;
-    width: 400px;
+    width: 520px;
     background-color: #ED6454;
+    border-radius: 5px;
     margin-left: 5px;
-    padding: 10px 20px;
+    grid-column-gap: 20px;
 }
 
 #list-ingredient li, #list-appliance li, #list-ustensil li {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 50px;    
     list-style-type: none;
     font-family: 'Lato';
     font-style: normal;
@@ -279,6 +277,12 @@ label {
     font-size: 18px;
     line-height: 30px;
     color: #FFFFFF;
+    cursor: pointer;
+    
+}
+
+#list-ingredient li:hover, #list-appliance li:hover, #list-ustensil li:hover {
+    transform: scale(1.1);
 }
 
 .gallery-section {

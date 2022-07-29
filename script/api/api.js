@@ -7,6 +7,7 @@ class Api {
     /**
      * Obtenir le nombre de recettes
      */
+
     async getTotalReceipes () {
         console.log('total recipes:' + recipes.length)
     }
@@ -52,36 +53,46 @@ class Api {
             const name = recipe.name
             const ingredients = recipe.ingredients
             const description = recipe.description
+            const appliance = recipe.appliance
+            const ustensils = recipe.ustensils
             const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
             const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
+            const indexOnAppliance = appliance.toLowerCase().indexOf(keyword.toLowerCase())
+
 
             // Récuperer les ingrédients contenant le mot clé avec la méthode de l'objet array "FILTER"
             const filterIngredients = ingredients.filter(elem => {
                 return elem.ingredient.toLowerCase().includes(keyword.toLowerCase())                        //La méthode includes() permet de déterminer si un tableau contient une valeur et renvoie true si c'est le cas, false sinon.
             })
 
+            // Récuperer les ustensiles contenant le mot clé
+            const filterUstensils = ustensils.filter(ustensils => {
+                return ustensils.toLowerCase().includes(keyword.toLowerCase())
+            })
+
             // Si l'index est différent de -1 alors le mot clé a été trouvé
-            if(indexOnName != -1 || filterIngredients.length > 0 || indexOnDescription != -1) {
+            if(indexOnName != -1 || filterIngredients.length > 0 || indexOnDescription != -1 || indexOnAppliance != -1 || filterUstensils.length > 0) {
                 return true
             } else {
                 return false
             }
         })
 
-        for(let recipe of recipesWithKeyword){
-            // console.log('recipe : ' + JSON.stringify(recipe))
-            // console.log('id : ' + recipe.id)
-            // console.log('name : ' + recipe.name)
-        }
+        // for(let recipe of recipesWithKeyword){
+        //     // console.log('recipe : ' + JSON.stringify(recipe))
+        //     // console.log('id : ' + recipe.id)
+        //     // console.log('name : ' + recipe.name)
+        // }
 
         return recipesWithKeyword
     }
 
     /**
-     * Renvoyer la liste des ingredients
+     * Renvoyer la liste des ingredients pour être affichée dans le block de tag
      * @param
      * @return tableau d'ingrédients
      */
+
     async getIngredients() {
         let ingredients = []
         const comparatorIngredient = (a,b) => {                                         // Trier la liste par l'ordre alphabetique
@@ -104,10 +115,11 @@ class Api {
     }
     
     /**
-     * Renvoyer la liste des appareils
+     * Renvoyer la liste des appareils pour être affichée dans le block de tag
      * @param
      * @return tableau d'appareils
      */
+
     async getAppliances() {
         let appliances = []
         const comparatorAppliance = (a,b) => {
@@ -129,10 +141,11 @@ class Api {
     }
 
     /**
-     * Renvoyer la liste des ustensiles
+     * Renvoyer la liste des ustensiles pour être affichée dans le block de tag
      * @param
      * @return tableau des ustensiles
      */
+    
     async getUstensils() {
         let ustensils = []
         const comparatorUstensil = (a,b) => {
