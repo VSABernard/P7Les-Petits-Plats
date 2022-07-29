@@ -19,12 +19,14 @@ class TagsCard {
                 <section class="modal" id="tag-ingredients">
                     <button class="btn-tag" id="btn-ingredient">
                         <p>Ingredients</p>
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down" ></i>
                     </button>
                     <div class="modal-section" id="modal-ingredient" aria-hidden="true">
                         <input id="input-ingredient" class="tag-input" type="text" placeholder="Rechercher un ingredient">
-                        <i class="fa-solid fa-chevron-up" id="chevron-up-ingredient"></i>
-                        <ul class="list-ingredient"></ul>                    
+                        <button class="close-tag" id="close-ingredient">
+                            <i class="fa-solid fa-chevron-up" ></i>
+                        </button>
+                        <ul class="ul-tag" id="list-ingredient"></ul>                    
                     </div>
                 </section>
                 <section class="modal" id="tag-appliance">
@@ -33,9 +35,11 @@ class TagsCard {
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>  
                     <div class="modal-section" id="modal-appliance" aria-hidden="true">
-                        <input id="input-appliance" class="tag-input" type="text" placeholder="Rechercher un appliance">
-                        
-                        <ul class="list-appliance"></ul>
+                        <input id="input-appliance" class="tag-input" type="text" placeholder="Rechercher un appareil">
+                        <button class="close-tag" id="close-appliance">
+                            <i class="fa-solid fa-chevron-up" ></i>
+                        </button>                          
+                        <ul class="ul-tag" id="list-appliance"></ul>
                     </div>                      
                 </section>
                 <section class="modal" id="tag-ustensil">
@@ -44,9 +48,11 @@ class TagsCard {
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="modal-section" id="modal-ustensil" aria-hidden="true">                    
-                        <input id="input-ustensil" class="tag-input" type="text" placeholder="Rechercher un ingredient">
-                        
-                        <ul class="list-ustensil"></ul>
+                        <input id="input-ustensil" class="tag-input" type="text" placeholder="Rechercher un ustensile">
+                        <button class="close-tag" id="close-ustensil">
+                            <i class="fa-solid fa-chevron-up" ></i>
+                        </button> 
+                        <ul class="ul-tag" id="list-ustensil"></ul>
                     </div>
                 </section>
             </section>
@@ -57,7 +63,7 @@ class TagsCard {
 
     // Mettre à jour la liste de tags de l'ingredient
     updateListIngredients(ingredients) {
-        const listIngredient = document.querySelector('.list-ingredient')
+        const listIngredient = document.querySelector('#list-ingredient')
 
         ingredients.map((ingredient) => {
             let li = document.createElement('li')
@@ -68,7 +74,7 @@ class TagsCard {
 
     // Mettre à jour la liste de tags de l'appareil
     updateListAppliances(appliances) {
-        const listAppliance = document.querySelector('.list-appliance')
+        const listAppliance = document.querySelector('#list-appliance')
 
         appliances.map((appliance) => {
             let li = document.createElement('li')
@@ -79,7 +85,7 @@ class TagsCard {
 
     // Mettre à jour la liste de tags de l'ustensile
     updateListUstensils(ustensils) {
-        const listUstensil = document.querySelector('.list-ustensil')
+        const listUstensil = document.querySelector('#list-ustensil')
 
         ustensils.map((ustensil) => {
             let li = document.createElement('li')
