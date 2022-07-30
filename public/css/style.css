@@ -40,6 +40,8 @@ main {
     padding: 40px;
 }
 
+/*  LA BARRE DE RECHERCHE */
+
 .search-section {
     display: block;
     height: 80px;
@@ -88,6 +90,8 @@ label {
     cursor: pointer;
 }
 
+/* BLOCK TAG SELECTED */
+
 .tag-selected {
     height: 30px;
     width: 1260px;
@@ -112,6 +116,8 @@ label {
     gap: 50px;
 }
 
+/* BOUTONS DE TAG (FILTRES) */
+
 #btn-ingredient, #btn-appliance, #btn-ustensil {
     display: flex;
     flex-direction: row;
@@ -122,7 +128,6 @@ label {
     height: 69px;
     border-radius: 5px;
     cursor: pointer;    
-    
 }
 
 #btn-ingredient:hover, #btn-appliance:hover, #btn-ustensil:hover {
@@ -158,7 +163,7 @@ label {
     height: 9.88px;
 }
 
-/* BLOCK TAG */
+/* BLOCK LISTE DE TAG (FILTER) */
 
 .modal-section {
     position: absolute;
@@ -284,6 +289,8 @@ label {
 #list-ingredient li:hover, #list-appliance li:hover, #list-ustensil li:hover {
     transform: scale(1.1);
 }
+
+/* GALERIE DES RECETTES */
 
 .gallery-section {
     display: flex;
