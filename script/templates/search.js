@@ -16,7 +16,8 @@ class SearchBanner {
                 <img src="./public/assets/search.svg" class="input-icon" alt="icone de recherche">
             </button>
         </section>
-        <section class="error-msg" data-error-visible="true" data-error="Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...">
+        <section id="error-msg">
+            <p>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...</p>
         </section> `
         
         $wrapperSearch.innerHTML = searchForm

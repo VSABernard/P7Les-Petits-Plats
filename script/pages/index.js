@@ -11,6 +11,7 @@ class MainApp {
         this.$searchWrapper = document.querySelector('.search-section')
         this.$tagsWrapper = document.querySelector('.tags-section')
         this.$galleryWrapper = document.querySelector('.gallery-section')
+        this.$errorWrapper = document.querySelector('.block-error')        
         this.$tagsCard
     }
 
@@ -79,7 +80,6 @@ class MainApp {
 
     /**
      * Afficher les tags
-     * @param 
      */
 
     async displayTags() {
@@ -91,8 +91,7 @@ class MainApp {
 
     /**
      * Afficher la mise à jour de la liste de tags : ingredients, appareils, ustensiles
-     * @param 
-     */
+    */
 
     async updateTagsList() {
         let ingredients = await this.api.getIngredients()
@@ -106,13 +105,24 @@ class MainApp {
     }
 
     /**
-     * Afficher la liste des recettes
+     * Afficher la gallerie des recettes
      * @param recipes
      */
 
     async displayRecipes(recipes) {
         this.$galleryWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
         
+        // Afficher le block de message d'erreur
+        if (recipes.length == 0) {
+            this.$errorWrapper.style.display = 'block'
+            
+            const errorMsg = document.getElementById('error-msg')
+            errorMsg.style.display = 'block'
+
+            return
+        }
+
+
         for (let recipe of recipes) {
             const templateRecipe = new RecipeCard(recipe)
             this.$galleryWrapper.appendChild(

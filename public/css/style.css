@@ -46,15 +46,24 @@ main {
     display: block;
     height: 80px;
     width: 100%;
-    margin: auto;
+    margin: 30px auto;
 }
 
 .search-wrapper {
     position: absolute;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;
     width: 100%;
     margin: auto;
+}
+
+.block-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 80px;
 }
 
 label {
@@ -83,11 +92,25 @@ label {
     width: 32px;
     margin: auto 40px;
     left: 1220px;
-    top: 70px;
+    top: -50px;
     bottom: 14.63%;
     color: #000000;
     border: 0;
     cursor: pointer;
+}
+
+#error-msg {
+    display: none;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ED6454;
+    font-size: 15px;
+    text-align: left;
+    overflow: hidden;
+    margin-left: 60px;
+    margin-bottom: 30px;
 }
 
 /* BLOCK TAG SELECTED */
@@ -432,3 +455,18 @@ i {
     line-height: 16px;
 }
 
+/* MESSAGE D'ERREUR */
+
+.block-error {
+    display: none;
+    justify-content: center;
+}
+
+.block-error p {
+    text-align: center;
+    font-family: "Lato";
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ED6454;
+}

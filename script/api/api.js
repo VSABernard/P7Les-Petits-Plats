@@ -76,6 +76,7 @@ class Api {
             } else {
                 return false
             }
+
         })
 
         // for(let recipe of recipesWithKeyword){
@@ -89,7 +90,6 @@ class Api {
 
     /**
      * Renvoyer la liste des ingredients pour être affichée dans le block de tag
-     * @param
      * @return tableau d'ingrédients
      */
 
@@ -116,7 +116,6 @@ class Api {
     
     /**
      * Renvoyer la liste des appareils pour être affichée dans le block de tag
-     * @param
      * @return tableau d'appareils
      */
 
@@ -142,7 +141,6 @@ class Api {
 
     /**
      * Renvoyer la liste des ustensiles pour être affichée dans le block de tag
-     * @param
      * @return tableau des ustensiles
      */
     
