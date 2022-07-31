@@ -112,16 +112,15 @@ class MainApp {
     async displayRecipes(recipes) {
         this.$galleryWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
         
-        // Afficher le block de message d'erreur
+        // Par défaut cacher le message d'erreur 
+        this.hideMsgError()
+        
+        // Afficher le message d'erreur sous la barre de recherche principale si aucun résultat trouvé
         if (recipes.length == 0) {
-            this.$errorWrapper.style.display = 'block'
-            
-            const errorMsg = document.getElementById('error-msg')
-            errorMsg.style.display = 'block'
+            this.showMsgError()
 
             return
         }
-
 
         for (let recipe of recipes) {
             const templateRecipe = new RecipeCard(recipe)
@@ -129,6 +128,24 @@ class MainApp {
                 templateRecipe.createRecipesCard()
             )
         } 
+    }
+
+    showMsgError() {
+        this.$errorWrapper.style.display = 'block'
+
+        // Afficher le message d'erreur sous la barre de recherche principale si aucun résultat trouvé
+        const errorMsg = document.getElementById('error-msg')
+        errorMsg.style.display = 'block'
+    }
+
+    hideMsgError() {
+        this.$errorWrapper.style.display = 'none'
+
+        // Par défaut cacher le message d'erreur sous la barre de recherche principale
+        const errorMsg = document.getElementById('error-msg')
+        if(errorMsg != null) {
+            errorMsg.style.display = 'none'
+        }
     }
 }
 
