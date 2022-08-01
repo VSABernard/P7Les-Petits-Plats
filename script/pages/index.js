@@ -1,5 +1,5 @@
 import { SearchBanner } from '../templates/search.js'
-import { TagsCard } from '../templates/tags.js'
+import { TagsCard, TagSelectedCard } from '../templates/tags.js'
 import { RecipeCard } from '../templates/gallery.js'
 import { Api } from '../api/api.js'
 
@@ -9,11 +9,13 @@ class MainApp {
     constructor() {
         this.api = new Api()
         this.$searchWrapper = document.querySelector('.search-section')
+        this.$tagsSelectedWrapper = document.querySelector('.tag-selected-section')
         this.$tagsWrapper = document.querySelector('.tags-section')
         this.$galleryWrapper = document.querySelector('.gallery-section')
         this.$errorWrapper = document.querySelector('.block-error')        
         this.$tagsCard
-        this.$tagsSelected = []
+        this.$tagsSelectedCard
+        this.$tabTagsSelected = []
     }
 
     /**
@@ -47,7 +49,7 @@ class MainApp {
 
     /**
      * Traitement d'événement de la recherche par mot clé 
-     */
+    */
 
     async onSearchByKeyword(event){
 
@@ -69,8 +71,8 @@ class MainApp {
     }
 
     /**
-     * Afficher la barre de recherche
-     */
+     * Afficher la BARRE DE RECHERCHE
+    */
 
     async displaySearch() {
         const templateSearch = new SearchBanner()
@@ -79,15 +81,65 @@ class MainApp {
         )
     }
 
+    showMsgError() {
+        this.$errorWrapper.style.display = 'block'
+
+        // Afficher le message d'erreur sous la barre de recherche principale si aucun résultat trouvé
+
+        const errorMsg = document.getElementById('error-msg')
+        errorMsg.style.display = 'block'
+    }
+
+    hideMsgError() {
+        this.$errorWrapper.style.display = 'none'
+
+        // Par défaut cacher le message d'erreur sous la barre de recherche principale
+
+        const errorMsg = document.getElementById('error-msg')
+        if(errorMsg != null) {
+            errorMsg.style.display = 'none'
+        }
+    }
+
+
     /**
-     * Afficher les tags
-     */
+     * Afficher les TAGS buttons + modales
+    */
 
     async displayTags() {
         this.$tagsCard = new TagsCard()
         this.$tagsWrapper.appendChild(
             this.$tagsCard.createTagsCard()
         )
+    }
+
+    /**
+     * Afficher les tags selected
+    */
+
+    async displaySelectedTags(tabTagsSelected) {
+        this.$tagsSelectedWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
+        
+        for (let tagSelected of tabTagsSelected) {
+            const templatetagsSelected = new TagSelectedCard(tagSelected)
+            this.$tagsSelectedWrapper.appendChild(
+                templatetagsSelected.createTagSelectedCard()
+            )
+        } 
+
+        // Ajouter un listener sur chaque tag selectionné pour pouvoir le fermer
+        this.addSelectedTagListener()
+
+    }
+
+    async addSelectedTagListener() {
+        const closeTagSelected = document.querySelectorAll('.close-tag-selected')
+        closeTagSelected.forEach( function(elem) {
+            elem.addEventListener('click', function(event) {
+                console.log('type :' + event.currentTarget.attributes['data-type'])
+                console.log('value :' + event.currentTarget.attributes['data-value'])
+            })
+        })
     }
 
     /**
@@ -106,50 +158,6 @@ class MainApp {
         let ustensil = await this.api.getUstensils()
         this.$tagsCard.updateListUstensils(ustensil)
         this.addTagsUstensilListener()
-    }
-
-    /**
-     * Afficher la gallerie des recettes
-     * @param recipes
-     */
-
-    async displayRecipes(recipes) {
-        this.$galleryWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
-        
-        // Par défaut cacher le message d'erreur 
-        this.hideMsgError()
-        
-        // Afficher le message d'erreur sous la barre de recherche principale si aucun résultat trouvé
-        if (recipes.length == 0) {
-            this.showMsgError()
-
-            return
-        }
-
-        for (let recipe of recipes) {
-            const templateRecipe = new RecipeCard(recipe)
-            this.$galleryWrapper.appendChild(
-                templateRecipe.createRecipesCard()
-            )
-        } 
-    }
-
-    showMsgError() {
-        this.$errorWrapper.style.display = 'block'
-
-        // Afficher le message d'erreur sous la barre de recherche principale si aucun résultat trouvé
-        const errorMsg = document.getElementById('error-msg')
-        errorMsg.style.display = 'block'
-    }
-
-    hideMsgError() {
-        this.$errorWrapper.style.display = 'none'
-
-        // Par défaut cacher le message d'erreur sous la barre de recherche principale
-        const errorMsg = document.getElementById('error-msg')
-        if(errorMsg != null) {
-            errorMsg.style.display = 'none'
-        }
     }
 
     // Ajouter le listener sur chaque tag de la modale des ingredients
@@ -194,14 +202,45 @@ class MainApp {
         } )
     }
 
-    // La méthode qui ajoute un tag au tableau des tags selecyionnés
+    // La méthode qui ajoute un tag au tableau des tags selectionnés
 
-    addSelectedTag(type,tagSelected){
-        this.$tagsSelected.push({type, tagSelected})
+    addSelectedTag(type, value){
+        this.$tabTagsSelected.push({type, value})
+
+        // On rafraîchit la liste des tags sélectionnés
+        this.displaySelectedTags(this.$tabTagsSelected)
         //refreshTagListSelected
     }
 
     
+
+
+    /**
+     * ****************************************************************************************************
+     * Afficher la GALLERIE des recettes
+     * @param recipes
+     */
+
+    async displayRecipes(recipes) {
+        this.$galleryWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
+        
+        // Par défaut cacher le message d'erreur 
+        this.hideMsgError()
+        
+        // Afficher le message d'erreur sous la barre de recherche principale si aucun résultat trouvé
+        if (recipes.length == 0) {
+            this.showMsgError()
+
+            return
+        }
+
+        for (let recipe of recipes) {
+            const templateRecipe = new RecipeCard(recipe)
+            this.$galleryWrapper.appendChild(
+                templateRecipe.createRecipesCard()
+            )
+        } 
+    }
 }
 
 const mainApp = new MainApp()

@@ -1,13 +1,13 @@
 // La mise en place du block de tags
 
 // Padding à enlever lors de la fermeture des modals pour retrouver la taille d'origine des boutons
-const PADDING_BTN_TAG = 12                                          
+const PADDING_BTN_TAG = 17                                          
 
 // DOM éléments
-let btnIngredient = document.querySelector('#btn-ingredient')
+const btnIngredient = document.querySelector('#btn-ingredient')
 const btnAppliance = document.querySelector('#btn-appliance')
 const btnUstensil = document.querySelector('#btn-ustensil')
-const modalsSection = document.querySelectorAll('.modal-section')
+// const modalsSection = document.querySelectorAll('.modal-section')
 const modalIngredient = document.querySelector('#modal-ingredient')
 const modalAppliance = document.querySelector('#modal-appliance')
 const modalUstensil = document.querySelector('#modal-ustensil')
@@ -32,7 +32,9 @@ const onOpenTagIngredients = () => {
     // Ouverture de la modale 
 
     modalIngredient.setAttribute('aria-hidden', 'false')
-    modalIngredient.style.display = 'flex'    
+    modalIngredient.style.display = 'flex'  
+    onCloseTagAppliances()
+    onCloseTagUstensils()
     closeIngredient.focus()
 
     // Obtenir les infos sur la taille du bouton sans passer par le CSS
@@ -46,7 +48,7 @@ const onOpenTagIngredients = () => {
 
     const sizeInfoModal = modalIngredient.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    console.log(widthModal)
+    console.log(widthModal +'px')
 
     // On change la taille du bouton pour qu'il ait la même taille que la modale
     // afin de décaler les boutons situé à droite
@@ -63,6 +65,8 @@ const onOpenTagAppliances = () => {
 
     modalAppliance.setAttribute('aria-hidden', 'false')
     modalAppliance.style.display = 'flex'
+    onCloseTagIngredients()
+    onCloseTagUstensils()
     closeAppliance.focus()
 
     // Obtenir les infos sur la taille du bouton sans passer par le CSS
@@ -76,7 +80,7 @@ const onOpenTagAppliances = () => {
 
     const sizeInfoModal = modalAppliance.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    console.log(widthModal)
+    console.log(widthModal +'px')
 
     // On change la taille du bouton pour qu'il ait la même taille que la modale
     // afin de décaler les boutons situé à droite
@@ -93,6 +97,8 @@ const onOpenTagUstensils = () => {
 
     modalUstensil.setAttribute('aria-hidden', 'false')
     modalUstensil.style.display = 'flex'
+    onCloseTagIngredients()
+    onCloseTagAppliances()
     closeUstensil.focus()
 }
 btnUstensil.addEventListener('click', onOpenTagUstensils)
@@ -136,21 +142,21 @@ closeUstensil.addEventListener('click', onCloseTagUstensils)
 
 // Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
 
-modalsSection.forEach(modal=> {
-    // modal.addEventListener('blur', onBlurModal, true)
-})
+// modalsSection.forEach(modal=> {
+//     // modal.addEventListener('blur', onBlurModal, true)
+// })
 
-function onBlurModal(event) {
-    console.log('blurModal :' + event.currentTarget.id)
-    switch (event.currentTarget.id) {
-    case 'modal-ingredient' : onCloseTagIngredients()
-        break
-    case 'modal-appliance' : onCloseTagAppliances()
-        break
-    case 'modal-ustensil' : onCloseTagUstensils()
-        break
-    }
-}
+// function onBlurModal(event) {
+//     console.log('blurModal :' + event.currentTarget.id)
+//     switch (event.currentTarget.id) {
+//     case 'modal-ingredient' : onCloseTagIngredients()
+//         break
+//     case 'modal-appliance' : onCloseTagAppliances()
+//         break
+//     case 'modal-ustensil' : onCloseTagUstensils()
+//         break
+//     }
+// }
 
 // Function qui reset la valeur dans l'input une fois la modale de tag est fermée
 
@@ -159,7 +165,6 @@ function resetInputTag() {
         element.value = ''
     })
 }
-
 
 
 

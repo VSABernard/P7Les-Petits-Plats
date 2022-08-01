@@ -115,31 +115,70 @@ label {
 
 /* BLOCK TAG SELECTED */
 
-.tag-selected {
-    height: 30px;
+.tag-selected-section {
+    height: 50px;
     width: 1260px;
     margin: 20px 60px;
     color: white;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    border: 1px solid rgb(204, 194, 194);
 }
 
-.tags-section {
-    height: 60px;
-    width: 1440px;
-    margin: 30px 60px;
+.tag-li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    height: 40px;
+    width: auto;
+    padding: 5px 15px 5px 5px;
+    border-radius: 5px;
 }
+
+.li-selected {
+    margin: 10px;
+    height: 30px;
+    color: #FFFFFF;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.close-tag-selected {
+    align-items: center;
+    height: 18px;
+    width: 18px;
+    padding: 8px;
+    margin: auto;
+    border: #FFFFFF 3px solid;
+    border-radius: 15px;
+    background-color: transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.tag-cross {
+    position: relative;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: -6px;
+    margin-left: -4px;
+}
+
+/* BOUTONS DE TAG (FILTRES) */
 
 .tags {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     gap: 50px;
+    height: 60px;
+    width: 1440px;
+    margin: 30px 60px;
 }
-
-/* BOUTONS DE TAG (FILTRES) */
 
 #btn-ingredient, #btn-appliance, #btn-ustensil {
     display: flex;
@@ -157,15 +196,15 @@ label {
     transform : scale(1.1);
 }
 
-#btn-ingredient {
+#btn-ingredient, .tag-li.ingredient {
     background-color: #3282F7;
 }
 
-#btn-appliance {
+#btn-appliance, .tag-li.appliance {
     background-color: #68D9A4;
 }
 
-#btn-ustensil  {
+#btn-ustensil, .tag-li.ustensil  {
     background-color: #ED6454;
 }
 

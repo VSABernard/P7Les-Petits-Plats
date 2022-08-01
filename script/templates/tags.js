@@ -1,4 +1,4 @@
-import { MainApp } from '../pages/index.js'
+// import { MainApp } from '../pages/index.js'
 
 // La mise en place des filtres
 class TagsCard {
@@ -98,4 +98,28 @@ class TagsCard {
     }
 }
 
-export { TagsCard }
+// La mise en place des liste de tags selectionnés
+class TagSelectedCard {
+    constructor(tagSelected) {
+        this.$filter = document.createElement('section')
+        this._tagSelected = tagSelected
+    }
+
+    createTagSelectedCard() {
+        this.$filter.classList.add('tags-selected')
+        this.$filter.setAttribute('role', 'listbox')
+
+        const tagSelected = `
+            <section class ="tag-li ${this._tagSelected.type}">
+                <div class="li-selected ">${this._tagSelected.value}</div>
+                <button class="close-tag-selected" data-type="${this._tagSelected.type}" data-value="${this._tagSelected.value}">
+                    <p class="tag-cross">X</p>
+                </button>
+            </section>`
+        
+        this.$filter.innerHTML = tagSelected
+        return this.$filter
+    }
+}
+
+export { TagsCard, TagSelectedCard }
