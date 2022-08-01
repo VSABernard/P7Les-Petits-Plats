@@ -137,7 +137,7 @@ closeUstensil.addEventListener('click', onCloseTagUstensils)
 // Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
 
 modalsSection.forEach(modal=> {
-    modal.addEventListener('blur', onBlurModal, true)
+    // modal.addEventListener('blur', onBlurModal, true)
 })
 
 function onBlurModal(event) {

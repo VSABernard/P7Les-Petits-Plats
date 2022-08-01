@@ -98,5 +98,4 @@ class TagsCard {
     }
 }
 
-
 export { TagsCard }

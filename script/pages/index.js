@@ -13,6 +13,7 @@ class MainApp {
         this.$galleryWrapper = document.querySelector('.gallery-section')
         this.$errorWrapper = document.querySelector('.block-error')        
         this.$tagsCard
+        this.$tagsSelected = []
     }
 
     /**
@@ -96,12 +97,15 @@ class MainApp {
     async updateTagsList() {
         let ingredients = await this.api.getIngredients()
         this.$tagsCard.updateListIngredients(ingredients)
+        this.addTagsIngredientListener()
 
         let appliance = await this.api.getAppliances()
         this.$tagsCard.updateListAppliances(appliance)
+        this.addTagsApplianceListener()
 
         let ustensil = await this.api.getUstensils()
         this.$tagsCard.updateListUstensils(ustensil)
+        this.addTagsUstensilListener()
     }
 
     /**
@@ -147,6 +151,57 @@ class MainApp {
             errorMsg.style.display = 'none'
         }
     }
+
+    // Ajouter le listener sur chaque tag de la modale des ingredients
+
+    addTagsIngredientListener(){
+        const listTagsIngredient = document.querySelectorAll('#list-ingredient li')
+
+        listTagsIngredient.forEach( function(elem) {
+            elem.addEventListener('click', function(event) {
+                console.log('tag ingredient :' + event.target.innerHTML)
+                mainApp.addSelectedTag('ingredient', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
+                event.stopPropagation()                                                 
+            },true)
+        } )
+    }
+
+    // Ajouter le listener sur chaque tag de la modale des appareils
+
+    addTagsApplianceListener(){
+        const listTagsAppliance = document.querySelectorAll('#list-appliance li')
+
+        listTagsAppliance.forEach( function(elem) {
+            elem.addEventListener('click', function(event) {
+                console.log('tag appliance :' + event.target.innerHTML)
+                mainApp.addSelectedTag('appliance', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
+                event.stopPropagation()                                                 
+            },true)
+        } )
+    }
+
+    // Ajouter le listener sur chaque tag de la modale des ustensiles
+
+    addTagsUstensilListener(){
+        const listTagsUstensil = document.querySelectorAll('#list-ustensil li')
+
+        listTagsUstensil.forEach( function(elem) {
+            elem.addEventListener('click', function(event) {
+                console.log('tag ustensil :' + event.target.innerHTML)
+                mainApp.addSelectedTag('ustensil', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
+                event.stopPropagation()                                                 
+            },true)
+        } )
+    }
+
+    // La méthode qui ajoute un tag au tableau des tags selecyionnés
+
+    addSelectedTag(type,tagSelected){
+        this.$tagsSelected.push({type, tagSelected})
+        //refreshTagListSelected
+    }
+
+    
 }
 
 const mainApp = new MainApp()
@@ -187,6 +242,17 @@ inputUstensil.addEventListener('keyup', function(event) {
     console.log('input tag')
     mainApp.onSearchByKeyword(event)
 })
+
+
+
+
+
+
+
+
+
+
+
 
 
 
