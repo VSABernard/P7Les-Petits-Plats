@@ -3,7 +3,6 @@ import { TagsCard, TagSelectedCard } from '../templates/tags.js'
 import { RecipeCard } from '../templates/gallery.js'
 import { Api } from '../api/api.js'
 
-
 class MainApp {
 
     constructor() {
@@ -101,7 +100,6 @@ class MainApp {
         }
     }
 
-
     /**
      * Afficher les TAGS buttons + modales
     */
@@ -117,10 +115,10 @@ class MainApp {
      * Afficher les tags selected
     */
 
-    async displaySelectedTags(tabTagsSelected) {
+    async displaySelectedTags() {
         this.$tagsSelectedWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
         
-        for (let tagSelected of tabTagsSelected) {
+        for (let tagSelected of this.$tabTagsSelected) {
             const templatetagsSelected = new TagSelectedCard(tagSelected)
             this.$tagsSelectedWrapper.appendChild(
                 templatetagsSelected.createTagSelectedCard()
@@ -129,17 +127,40 @@ class MainApp {
 
         // Ajouter un listener sur chaque tag selectionné pour pouvoir le fermer
         this.addSelectedTagListener()
-
     }
 
+    // Ajouter un listerner sur le button de la fermeture du tag selectionné
     async addSelectedTagListener() {
         const closeTagSelected = document.querySelectorAll('.close-tag-selected')
-        closeTagSelected.forEach( function(elem) {
-            elem.addEventListener('click', function(event) {
-                console.log('type :' + event.currentTarget.attributes['data-type'])
-                console.log('value :' + event.currentTarget.attributes['data-value'])
+        // const modaleTagSelected = document.querySelectorAll('.tag-li')
+        closeTagSelected.forEach( function(elem){
+            elem.addEventListener('click', (event) => {
+                let type = event.currentTarget.getAttribute('data-type')
+                let value = event.currentTarget.getAttribute('data-value')
+                mainApp.deleteSelectedTags(type, value)
+                mainApp.displaySelectedTags()
             })
         })
+    }
+
+    /**
+     * Effacer un élément du tableau des tags sélectionnés
+     * @param type type du tag (ex.ingredient)
+     * @param value valeur du tag (ex.banane)
+    */ 
+    async deleteSelectedTags(type, value) {
+
+        this.$tabTagsSelected = this.$tabTagsSelected.filter((tagSelected) => {
+            
+            // Si on trouve le tag sélectionné que l'on veut fermer dans le tableau, on le supprime du tableau
+            if(tagSelected.type === type && tagSelected.value === value){
+                return false
+            } else {
+                return true
+            }
+        })
+
+        console.table(this.$tabTagsSelected)
     }
 
     /**
@@ -208,12 +229,9 @@ class MainApp {
         this.$tabTagsSelected.push({type, value})
 
         // On rafraîchit la liste des tags sélectionnés
-        this.displaySelectedTags(this.$tabTagsSelected)
+        this.displaySelectedTags()
         //refreshTagListSelected
     }
-
-    
-
 
     /**
      * ****************************************************************************************************
