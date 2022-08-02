@@ -116,9 +116,9 @@ label {
 /* BLOCK TAG SELECTED */
 
 .tag-selected-section {
-    height: 50px;
+    height: 40px;
     width: 1260px;
-    margin: 20px 60px;
+    margin: -10px 60px -20px;
     color: white;
     display: flex;
     flex-wrap: wrap;
@@ -130,15 +130,15 @@ label {
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;
-    height: 40px;
+    height: 30px;
     width: auto;
     padding: 5px 15px 5px 5px;
     border-radius: 5px;
 }
 
 .li-selected {
-    margin: 10px;
-    height: 30px;
+    margin: 5px 10px;
+    height: 20px;
     color: #FFFFFF;
     font-family: 'Lato';
     font-style: normal;
@@ -236,29 +236,24 @@ label {
     z-index: 1;
 }
 
-#modal-ingredient {    
+#modal-ingredient, #modal-ustensil, #modal-appliance {    
     margin-top: -70px;
     padding-top: 20px;
+    max-height: 100%; 
     width: 700px;
-    height: 2000px;
-    background-color: #3282F7;   
     border-radius: 5px; 
 }
 
-#modal-appliance {    
-    margin-top: -70px;
-    padding-top: 20px;
-    width: 485px;
-    height: 250px;
+#modal-ingredient, #list-ingredient {  
+    background-color: #3282F7;   
+}
+
+#modal-appliance, #list-appliance {   
     background-color: #68D9A4;    
 }
 
-#modal-ustensil {    
-    margin-top: -70px;
-    padding-top: 20px;
-    width: 580px;
-    height: 490px;
-    background-color:#ED6454;    
+#modal-ustensil, #list-ustensil {  
+    background-color:#ED6454;  
 }
 
 .tag-input {
@@ -268,6 +263,7 @@ label {
     text-align: left;
     width: 300px;
     height: 30px;
+    margin-bottom: 20px;
     margin-left: 20px;
     opacity: 50%;
 }
@@ -312,25 +308,9 @@ label {
     z-index: 1;
 }
 
-#list-ingredient {
-    width: 660px;
-    background-color: #3282F7;
+#list-ingredient, #list-appliance, #list-ustensil {
+    width: 680px;
     border-radius: 5px;
-}
-
-#list-appliance {
-    width: 460px;
-    background-color: #68D9A4;
-    border-radius: 5px;
-    grid-column-gap: 20px;
-}
-
-#list-ustensil {
-    width: 520px;
-    background-color: #ED6454;
-    border-radius: 5px;
-    margin-left: 5px;
-    grid-column-gap: 20px;
 }
 
 #list-ingredient li, #list-appliance li, #list-ustensil li {

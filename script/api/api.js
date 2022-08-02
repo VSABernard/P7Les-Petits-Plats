@@ -93,13 +93,13 @@ class Api {
      * @return tableau d'ingrédients
      */
 
-    async getIngredients() {
+    async getIngredients(mapRecipes) {
         let ingredients = []
         const comparatorIngredient = (a,b) => {                                         // Trier la liste par l'ordre alphabetique
             return a.localeCompare(b)                                                   // Ignorer les accents lors de tri
         }
 
-        recipes.map((recipe) => {
+        mapRecipes.map((recipe) => {
             recipe.ingredients.map((elem) =>{
                 if (!ingredients.includes(elem.ingredient)) {                           
                     ingredients.push(elem.ingredient)                                   // Rajouter un élémet dans un tableau
@@ -119,13 +119,13 @@ class Api {
      * @return tableau d'appareils
      */
 
-    async getAppliances() {
+    async getAppliances(mapRecipes) {
         let appliances = []
         const comparatorAppliance = (a,b) => {
             return a.localeCompare(b)
         }
 
-        recipes.map((recipe) => {
+        mapRecipes.map((recipe) => {
             if (!appliances.includes(recipe.appliance)) {
                 appliances.push(recipe.appliance)
             }
@@ -144,13 +144,13 @@ class Api {
      * @return tableau des ustensiles
      */
     
-    async getUstensils() {
+    async getUstensils(mapRecipes) {
         let ustensils = []
         const comparatorUstensil = (a,b) => {
             return a.localeCompare(b)
         }
 
-        recipes.map((recipe) => {
+        mapRecipes.map((recipe) => {
             recipe.ustensils.map((ustensil) =>{
                 if (!ustensils.includes(ustensil)) {
                     ustensils.push(ustensil)

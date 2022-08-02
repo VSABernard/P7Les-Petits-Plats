@@ -1,4 +1,4 @@
-import { mainApp } from "../pages/index.js"
+import { mainApp } from '../pages/index.js'
 
 
 // La mise en place du block de tags

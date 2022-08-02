@@ -15,6 +15,8 @@ class MainApp {
         this.$tagsCard
         this.$tagsSelectedCard
         this.$tabTagsSelected = []
+        this.$recipesAll = []
+        this.$recipesFilteredByKeywords = []
     }
 
     /**
@@ -27,14 +29,14 @@ class MainApp {
         // Appel des méthodes de l'Api
         // await this.api.getTotalReceipes()
         // await this.api.getRecipes()
-        await this.api.getIngredients()
-        await this.api.getAppliances()
-        await this.api.getUstensils()
+        // await this.api.getIngredients()
+        // await this.api.getAppliances()
+        // await this.api.getUstensils()
 
         await this.api.getRecipesByKeyword('')
 
-        const recipes = await this.api.getRecipes()
-        this.displayRecipes(recipes)
+        this.$recipesAll = await this.api.getRecipes()
+        this.displayRecipes(this.$recipesAll)
 
         // Mise en place la barre de recherche
         await this.displaySearch()
@@ -43,7 +45,7 @@ class MainApp {
         await this.displayTags()   
 
         // La mise à jour des listes de tag
-        await this.updateTagsList()
+        await this.updateTagsList(this.$recipesAll)
     }
 
     /**
@@ -59,17 +61,22 @@ class MainApp {
         console.log('recherche en cours :' + search.value)
         console.log('length :' + length)
         if (length < 3) { 
-            const recipes = await this.api.getRecipes() 
-            this.displayRecipes(recipes)                    // afficher la totalité de liste de recettes s'il y a moins de 3 caractères
-            return                                          // pas de recherche si la longeur est <3
+            this.displayRecipes(this.$recipesAll)                           // Afficher la totalité de liste de recettes s'il y a moins de 3 caractères
+            this.updateTagsList(this.$recipesAll)                           // Remettre en totalité la liste des tags après une recherche sur la barre de recherche principale
+            return                                                         // Pas de recherche si la longeur est <3
         }
         console.log('lancer la recherche!!!!')
 
-        console.time('search')                                                      // affiche le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
-        let recipesWithKeyword = await this.api.getRecipesByKeyword(search.value)
+        console.time('search')                
+        let keyword = search.value                                          // afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
+
+        // Obtenir la liste de recette qui contiennent à un mot-clé dans le titre, les ingrédients et la déscription des recette
+        this.recipesFilteredByKeywords = await this.api.getRecipesByKeyword(keyword)
         console.timeEnd('search')
 
-        this.displayRecipes(recipesWithKeyword)
+        this.displayRecipes(this.recipesFilteredByKeywords)
+
+        this.updateTagsList(this.recipesFilteredByKeywords)                 // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
     }
 
     /**
@@ -170,32 +177,36 @@ class MainApp {
 
     /**
      * Afficher la mise à jour de la liste de tags : ingredients, appareils, ustensiles
+     * @param mapRecipes liste de recette
     */
 
-    async updateTagsList() {
-        let ingredients = await this.api.getIngredients()
+    async updateTagsList(mapRecipes) {
+        let ingredients = await this.api.getIngredients(mapRecipes)
         this.$tagsCard.updateListIngredients(ingredients)           // afficher la totalité de liste
         this.addTagsIngredientListener()
 
-        let appliance = await this.api.getAppliances()
+        let appliance = await this.api.getAppliances(mapRecipes)
         this.$tagsCard.updateListAppliances(appliance)
         this.addTagsApplianceListener()
 
-        let ustensil = await this.api.getUstensils()
+        let ustensil = await this.api.getUstensils(mapRecipes)
         this.$tagsCard.updateListUstensils(ustensil)
         this.addTagsUstensilListener()
     }
 
     /**
      * Traitement de la recherche par mot-clé sur le TAG
+     * @param type type du tag (ex.ingredient)
+     * @param value valeur du tag (ex.banane)
     */
+
     async onFilterTagByKeyword(event, type) {
         let search = event.target       
         let length  = search.value.length
         let keyword = search.value
-        let ingredients = await this.api.getIngredients()
-        let appliance = await this.api.getAppliances()
-        let ustensil = await this.api.getUstensils()
+        let ingredients = await this.api.getIngredients(this.$recipesAll)
+        let appliance = await this.api.getAppliances(this.$recipesAll)
+        let ustensil = await this.api.getUstensils(this.$recipesAll)
 
         if (length < 3) {
             switch(type){
@@ -212,6 +223,8 @@ class MainApp {
             return                                                          // pas de recherche si la longeur est <3
         }
         
+        // Filtrer la liste des tags aprés avoir sélectionné un tag spécifique
+
         switch(type){
         case 'ingredient' : 
             let ingredientsFiltered = ingredients.filter((ingredient) => {
@@ -248,7 +261,9 @@ class MainApp {
             break
         }
 
-    }    // Ajouter le listener sur chaque tag de la modale des ingredients
+    }    
+    
+    // Ajouter le listener sur chaque tag de la modale des ingredients
 
     addTagsIngredientListener(){
         const listTagsIngredient = document.querySelectorAll('#list-ingredient li')
