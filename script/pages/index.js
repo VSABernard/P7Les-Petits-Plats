@@ -65,7 +65,10 @@ class MainApp {
         }
         console.log('lancer la recherche!!!!')
 
+        console.time('search')                                                      // affiche le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
         let recipesWithKeyword = await this.api.getRecipesByKeyword(search.value)
+        console.timeEnd('search')
+
         this.displayRecipes(recipesWithKeyword)
     }
 
@@ -129,16 +132,18 @@ class MainApp {
         this.addSelectedTagListener()
     }
 
-    // Ajouter un listerner sur le button de la fermeture du tag selectionné
+    /**
+     * Ajouter un listerner sur le button de la fermeture du tag selectionné
+    */ 
     async addSelectedTagListener() {
         const closeTagSelected = document.querySelectorAll('.close-tag-selected')
         // const modaleTagSelected = document.querySelectorAll('.tag-li')
-        closeTagSelected.forEach( function(elem){
+        closeTagSelected.forEach ((elem) => {
             elem.addEventListener('click', (event) => {
                 let type = event.currentTarget.getAttribute('data-type')
                 let value = event.currentTarget.getAttribute('data-value')
-                mainApp.deleteSelectedTags(type, value)
-                mainApp.displaySelectedTags()
+                this.deleteSelectedTags(type, value)
+                this.displaySelectedTags()
             })
         })
     }
@@ -169,7 +174,7 @@ class MainApp {
 
     async updateTagsList() {
         let ingredients = await this.api.getIngredients()
-        this.$tagsCard.updateListIngredients(ingredients)
+        this.$tagsCard.updateListIngredients(ingredients)           // afficher la totalité de liste
         this.addTagsIngredientListener()
 
         let appliance = await this.api.getAppliances()
@@ -181,7 +186,69 @@ class MainApp {
         this.addTagsUstensilListener()
     }
 
-    // Ajouter le listener sur chaque tag de la modale des ingredients
+    /**
+     * Traitement de la recherche par mot-clé sur le TAG
+    */
+    async onFilterTagByKeyword(event, type) {
+        let search = event.target       
+        let length  = search.value.length
+        let keyword = search.value
+        let ingredients = await this.api.getIngredients()
+        let appliance = await this.api.getAppliances()
+        let ustensil = await this.api.getUstensils()
+
+        if (length < 3) {
+            switch(type){
+            case 'ingredient' : 
+                this.$tagsCard.updateListIngredients(ingredients)           // afficher la totalité de liste si la longeur < 3
+                break
+            case 'appliance' :
+                this.$tagsCard.updateListAppliances(appliance)
+                break
+            case 'ustensil' :
+                this.$tagsCard.updateListUstensils(ustensil)
+                break
+            }                  
+            return                                                          // pas de recherche si la longeur est <3
+        }
+        
+        switch(type){
+        case 'ingredient' : 
+            let ingredientsFiltered = ingredients.filter((ingredient) => {
+                if (ingredient.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ){
+                    return true
+                } else {
+                    return false
+                }
+            })
+            this.$tagsCard.updateListIngredients(ingredientsFiltered)
+            this.addTagsIngredientListener()                                            // ajouter le tag sélectionné sur la bar de tag-selected
+            break
+        case 'appliance' :    
+            let appliancesFiltered = appliance.filter((appliance) => {
+                if (appliance.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ){
+                    return true
+                } else {
+                    return false
+                }
+            })
+            this.$tagsCard.updateListAppliances(appliancesFiltered)
+            this.addTagsApplianceListener()
+            break
+        case 'ustensil' :    
+            let ustensilsFiltered = ustensil.filter((ustensil) => {
+                if (ustensil.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ){
+                    return true
+                } else {
+                    return false
+                }
+            })
+            this.$tagsCard.updateListUstensils(ustensilsFiltered)
+            this.addTagsUstensilListener()
+            break
+        }
+
+    }    // Ajouter le listener sur chaque tag de la modale des ingredients
 
     addTagsIngredientListener(){
         const listTagsIngredient = document.querySelectorAll('#list-ingredient li')
@@ -264,6 +331,7 @@ class MainApp {
 const mainApp = new MainApp()
 await mainApp.init()
 
+
 // Ajouter le listener sur le champs de recherche
 
 let searchInput = document.querySelector('#search-input')
@@ -273,13 +341,14 @@ searchInput.addEventListener('keyup',function(event) {
     mainApp.onSearchByKeyword(event)
 })
 
+
 // Ajouter le listener sur le champs input dans le tag INGREDIENT
 
 let inputIngredient = document.querySelector('#input-ingredient')
 
 inputIngredient.addEventListener('keyup', function(event) {
     console.log('input tag')
-    mainApp.onSearchByKeyword(event)
+    mainApp.onFilterTagByKeyword(event, 'ingredient')
 })
 
 // Ajouter le listener sur le champs input dans le tag APPAREIL
@@ -288,7 +357,7 @@ let inputAppliance = document.querySelector('#input-appliance')
 
 inputAppliance.addEventListener('keyup', function(event) {
     console.log('input tag')
-    mainApp.onSearchByKeyword(event)
+    mainApp.onFilterTagByKeyword(event, 'appliance')
 })
 
 // Ajouter le listener sur le champs input dans le tag USTENSILES
@@ -297,7 +366,8 @@ let inputUstensil = document.querySelector('#input-ustensil')
 
 inputUstensil.addEventListener('keyup', function(event) {
     console.log('input tag')
-    mainApp.onSearchByKeyword(event)
+    mainApp.onFilterTagByKeyword(event, 'ustensil')
+    
 })
 
 
@@ -311,6 +381,4 @@ inputUstensil.addEventListener('keyup', function(event) {
 
 
 
-
-
-export { MainApp }
+export { MainApp, mainApp }

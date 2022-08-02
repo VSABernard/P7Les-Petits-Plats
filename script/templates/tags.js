@@ -65,6 +65,7 @@ class TagsCard {
 
     updateListIngredients(ingredients) {
         const listIngredient = document.querySelector('#list-ingredient')
+        listIngredient.replaceChildren()                                        // Enlever le contenu avant d'afficher un nouveau contenu
 
         ingredients.map((ingredient) => {
             let li = document.createElement('li')
@@ -77,6 +78,7 @@ class TagsCard {
 
     updateListAppliances(appliances) {
         const listAppliance = document.querySelector('#list-appliance')
+        listAppliance.replaceChildren()
 
         appliances.map((appliance) => {
             let li = document.createElement('li')
@@ -89,6 +91,7 @@ class TagsCard {
     
     updateListUstensils(ustensils) {
         const listUstensil = document.querySelector('#list-ustensil')
+        listUstensil.replaceChildren()
 
         ustensils.map((ustensil) => {
             let li = document.createElement('li')
