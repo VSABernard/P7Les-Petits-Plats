@@ -37,7 +37,7 @@ class Api {
 
     /**
      * Renvoyer la liste des recettes comportant le mot clé spécifique
-     * La recherche se fait sur le titre, les ingrédients, la description
+     * La recherche se fait sur LA BARRE DE RECHERCHE PRINCIPALE selon le titre, les ingrédients, la description
      * @param keyword : le mot clé
      * @return liste des recettes
      */
@@ -79,13 +79,67 @@ class Api {
 
         })
 
-        // for(let recipe of recipesWithKeyword){
-        //     // console.log('recipe : ' + JSON.stringify(recipe))
-        //     // console.log('id : ' + recipe.id)
-        //     // console.log('name : ' + recipe.name)
-        // }
-
         return recipesWithKeyword
+    }
+
+    /**
+     * Renvoyer la liste des recettes comportant le tag spécifique
+     * La recherche se fait avec DES TAGS selon les ingrédients, l'appareil et l'ustensile
+     * @param mapTags : la liste des tags sélectionnés
+     * @param mapRecipes : la liste des recettes 
+     * @return liste des recettes
+     */
+
+    async getRecipesByTagSelected(mapTags, mapRecipes) {
+        
+        let mapRecipesFilteredByTags = mapRecipes                           // La liste de recettes avant le traitement de filtrage sur le TAG
+
+        mapTags.map((tag) => {
+
+            console.log('mapTags :' + tag.value)
+            console.log('mapTags :' + tag.type)
+
+            switch(tag.type) {
+            case 'ingredient' :
+                mapRecipesFilteredByTags = mapRecipesFilteredByTags.filter(recipe => {
+                    const filterIngredients = recipe.ingredients.filter(elem => {
+                        return elem.ingredient.toLowerCase().includes(tag.value.toLowerCase())
+                    })
+
+                    if(filterIngredients.length > 0) {
+                        return true
+                    } else {
+                        return false
+                    }                    
+                }) 
+                
+                break
+            case 'appliance' :
+                mapRecipesFilteredByTags = mapRecipesFilteredByTags.filter(recipe => {
+                    if(recipe.appliance.toLowerCase().indexOf(tag.value.toLowerCase()) != -1) {
+                        return true
+                    } else {
+                        return false
+                    }                    
+                }) 
+                break
+            case 'ustensil' :
+                mapRecipesFilteredByTags = mapRecipesFilteredByTags.filter(recipe => {
+                    const filterUstensils = recipe.ustensils.filter(ustensils => {
+                        return ustensils.toLowerCase().includes(tag.value.toLowerCase())
+                    })
+
+                    if(filterUstensils.length > 0) {
+                        return true
+                    } else {
+                        return false
+                    }                    
+                }) 
+                break
+            }
+        })
+
+        return mapRecipesFilteredByTags
     }
 
     /**

@@ -1,4 +1,4 @@
-import { mainApp } from '../pages/index.js'
+// import { mainApp } from '../pages/index.js'
 
 
 // La mise en place du block de tags
@@ -122,7 +122,7 @@ const onCloseTagIngredients = () => {
     btnIngredient.focus()
     btnIngredient.style.width = (widthBtnIngredient - PADDING_BTN_TAG) +'px'        // Revenir à la taille d'origine du bouton lors de sa fermeture
     resetInputTag()
-    mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
+    // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
 }
 closeIngredient.addEventListener('click', onCloseTagIngredients)
 
@@ -134,7 +134,7 @@ const onCloseTagAppliances = () => {
     btnAppliance.focus()
     btnAppliance.style.width = (widthBtnAppliance - PADDING_BTN_TAG) +'px'          // Revenir à la taille d'origine du bouton lors de sa fermeture
     resetInputTag()
-    mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
+    // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
 }
 closeAppliance.addEventListener('click', onCloseTagAppliances)
 
@@ -146,7 +146,7 @@ const onCloseTagUstensils = () => {
     btnUstensil.focus()
     btnUstensil.style.width = (widthBtnUstensil - PADDING_BTN_TAG) +'px'          // Revenir à la taille d'origine du bouton lors de sa fermeture
     resetInputTag()
-    mainApp.updateTagsList()                                                      // Recharger la liste complete de tag lors de la femeture de la modale tag  
+    // mainApp.updateTagsList()                                                      // Recharger la liste complete de tag lors de la femeture de la modale tag  
 }
 closeUstensil.addEventListener('click', onCloseTagUstensils)
 

@@ -61,9 +61,9 @@ class MainApp {
         console.log('recherche en cours :' + search.value)
         console.log('length :' + length)
         if (length < 3) { 
-            this.displayRecipes(this.$recipesAll)                           // Afficher la totalité de liste de recettes s'il y a moins de 3 caractères
-            this.updateTagsList(this.$recipesAll)                           // Remettre en totalité la liste des tags après une recherche sur la barre de recherche principale
-            return                                                         // Pas de recherche si la longeur est <3
+            await this.displayRecipes(this.$recipesAll)                           // Afficher la totalité de liste de recettes s'il y a moins de 3 caractères
+            await this.updateTagsList(this.$recipesAll)                           // Remettre en totalité la liste des tags après une recherche sur la barre de recherche principale
+            return                                                                // Pas de recherche si la longeur est <3
         }
         console.log('lancer la recherche!!!!')
 
@@ -74,9 +74,9 @@ class MainApp {
         this.recipesFilteredByKeywords = await this.api.getRecipesByKeyword(keyword)
         console.timeEnd('search')
 
-        this.displayRecipes(this.recipesFilteredByKeywords)
+        await this.displayRecipes(this.recipesFilteredByKeywords)
 
-        this.updateTagsList(this.recipesFilteredByKeywords)                 // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
+        await this.updateTagsList(this.recipesFilteredByKeywords)                 // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
     }
 
     /**
@@ -126,7 +126,7 @@ class MainApp {
     */
 
     async displaySelectedTags() {
-        this.$tagsSelectedWrapper.replaceChildren()                          // Enlever le contenu avant d'afficher un nouveau contenu
+        this.$tagsSelectedWrapper.replaceChildren()                          // Enlever le contenu du barre tag-selected avant d'afficher un nouveau contenu
         
         for (let tagSelected of this.$tabTagsSelected) {
             const templatetagsSelected = new TagSelectedCard(tagSelected)
@@ -137,6 +137,17 @@ class MainApp {
 
         // Ajouter un listener sur chaque tag selectionné pour pouvoir le fermer
         this.addSelectedTagListener()
+    }
+
+    /**
+     * Faire la recherche par tag
+    */
+
+    async onSearchByTags() {
+        let recipesFilteredByTag = []
+        recipesFilteredByTag = await this.api.getRecipesByTagSelected(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
+
+        this.displayRecipes(recipesFilteredByTag)                                                           // Afficher les recettes qui correspondent aux tags sélectionnés
     }
 
     /**
@@ -151,6 +162,7 @@ class MainApp {
                 let value = event.currentTarget.getAttribute('data-value')
                 this.deleteSelectedTags(type, value)
                 this.displaySelectedTags()
+                this.onSearchByTags()                                                           // Afficher les recettes selon le tag restant
             })
         })
     }
@@ -195,7 +207,7 @@ class MainApp {
     }
 
     /**
-     * Traitement de la recherche par mot-clé sur le TAG
+     * Traitement de la recherche par mot-clé sur l'input de TAG
      * @param type type du tag (ex.ingredient)
      * @param value valeur du tag (ex.banane)
     */
@@ -211,7 +223,7 @@ class MainApp {
         if (length < 3) {
             switch(type){
             case 'ingredient' : 
-                this.$tagsCard.updateListIngredients(ingredients)           // afficher la totalité de liste si la longeur < 3
+                this.$tagsCard.updateListIngredients(ingredients)           // afficher la totalité de liste des tags si la longeur < 3
                 break
             case 'appliance' :
                 this.$tagsCard.updateListAppliances(appliance)
@@ -224,7 +236,7 @@ class MainApp {
         }
         
         // Filtrer la liste des tags aprés avoir sélectionné un tag spécifique
-
+        /* eslint-disable */
         switch(type){
         case 'ingredient' : 
             let ingredientsFiltered = ingredients.filter((ingredient) => {
@@ -260,11 +272,10 @@ class MainApp {
             this.addTagsUstensilListener()
             break
         }
-
     }    
     
     // Ajouter le listener sur chaque tag de la modale des ingredients
-
+    /* eslint-enable */
     addTagsIngredientListener(){
         const listTagsIngredient = document.querySelectorAll('#list-ingredient li')
 
@@ -305,14 +316,16 @@ class MainApp {
         } )
     }
 
-    // La méthode qui ajoute un tag au tableau des tags selectionnés
+    // La méthode qui AJOUTE UN TAG au tableau des tags selectionnés
 
     addSelectedTag(type, value){
         this.$tabTagsSelected.push({type, value})
-
+        
         // On rafraîchit la liste des tags sélectionnés
         this.displaySelectedTags()
-        //refreshTagListSelected
+
+        // Rechercher les recettes qui correspondent aux tags sélectionnés
+        this.onSearchByTags()
     }
 
     /**
