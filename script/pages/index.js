@@ -2,6 +2,7 @@ import { SearchBanner } from '../templates/search.js'
 import { TagsCard, TagSelectedCard } from '../templates/tags.js'
 import { RecipeCard } from '../templates/gallery.js'
 import { Api } from '../api/api.js'
+//import { onCloseModaleIngredients } from '../utils/tagsDisplay.js'
 
 class MainApp {
 
@@ -135,7 +136,7 @@ class MainApp {
             )
         } 
 
-        // Ajouter un listener sur chaque tag selectionné pour pouvoir le fermer
+        // Un listener sur chaque tag selectionné pour pouvoir le fermer
         this.addSelectedTagListener()
     }
 
@@ -147,7 +148,8 @@ class MainApp {
         let recipesFilteredByTag = []
         recipesFilteredByTag = await this.api.getRecipesByTagSelected(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
 
-        this.displayRecipes(recipesFilteredByTag)                                                           // Afficher les recettes qui correspondent aux tags sélectionnés
+        this.displayRecipes(recipesFilteredByTag)                                                    // Afficher les recettes qui correspondent aux tags sélectionnés
+        await this.updateTagsList(recipesFilteredByTag)                                              // Alimentation la liste des tags suite à une recherche par le tag
     }
 
     /**
@@ -283,8 +285,9 @@ class MainApp {
             elem.addEventListener('click', function(event) {
                 console.log('tag ingredient :' + event.target.innerHTML)
                 mainApp.addSelectedTag('ingredient', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
-                event.stopPropagation()                                                 
+                event.stopPropagation()                           
             },true)
+            
         } )
     }
 
@@ -325,7 +328,9 @@ class MainApp {
         this.displaySelectedTags()
 
         // Rechercher les recettes qui correspondent aux tags sélectionnés
-        this.onSearchByTags()
+        this.onSearchByTags()     
+        
+    
     }
 
     /**
@@ -360,7 +365,7 @@ const mainApp = new MainApp()
 await mainApp.init()
 
 
-// Ajouter le listener sur le champs de recherche
+// Ajouter le listener sur le champs de recherche principale
 
 let searchInput = document.querySelector('#search-input')
 

@@ -1,8 +1,8 @@
-// import { mainApp } from '../pages/index.js'
+import { mainApp } from '../pages/index.js'
 
 
 // La mise en place du block de tags
-
+    
 // Padding à enlever lors de la fermeture des modals pour retrouver la taille d'origine des boutons
 const PADDING_BTN_TAG = 17                                          
 
@@ -36,8 +36,8 @@ const onOpenTagIngredients = () => {
 
     modalIngredient.setAttribute('aria-hidden', 'false')
     modalIngredient.style.display = 'flex'  
-    onCloseTagAppliances()
-    onCloseTagUstensils()
+    onCloseModaleAppliances()
+    onCloseModaleUstensils()
     closeIngredient.focus()
 
     /*
@@ -72,8 +72,8 @@ const onOpenTagAppliances = () => {
 
     modalAppliance.setAttribute('aria-hidden', 'false')
     modalAppliance.style.display = 'flex'
-    onCloseTagIngredients()
-    onCloseTagUstensils()
+    onCloseModaleIngredients()
+    onCloseModaleUstensils()
     closeAppliance.focus()
 
     // Obtenir les infos sur la taille du bouton sans passer par le CSS
@@ -104,19 +104,19 @@ const onOpenTagUstensils = () => {
 
     modalUstensil.setAttribute('aria-hidden', 'false')
     modalUstensil.style.display = 'flex'
-    onCloseTagIngredients()
-    onCloseTagAppliances()
+    onCloseModaleIngredients()
+    onCloseModaleAppliances()
     closeUstensil.focus()
 }
 btnUstensil.addEventListener('click', onOpenTagUstensils)
 
 /**
-* FERMETURE du block de la liste de tags : ingredients, appareils, ustensiles
+* FERMETURE de la modale de la liste des tags : ingredients, appareils, ustensiles
 **/
 
 // INGREDIENTS
 
-const onCloseTagIngredients = () => {
+const onCloseModaleIngredients = () => {
     modalIngredient.setAttribute('aria-hidden', 'true')
     modalIngredient.style.display = 'none'    
     btnIngredient.focus()
@@ -124,11 +124,11 @@ const onCloseTagIngredients = () => {
     resetInputTag()
     // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
 }
-closeIngredient.addEventListener('click', onCloseTagIngredients)
+closeIngredient.addEventListener('click', onCloseModaleIngredients)
 
 // APPAREILS
 
-const onCloseTagAppliances = () => {
+const onCloseModaleAppliances = () => {
     modalAppliance.setAttribute('aria-hidden', 'true')
     modalAppliance.style.display = 'none'
     btnAppliance.focus()
@@ -136,11 +136,11 @@ const onCloseTagAppliances = () => {
     resetInputTag()
     // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
 }
-closeAppliance.addEventListener('click', onCloseTagAppliances)
+closeAppliance.addEventListener('click', onCloseModaleAppliances)
 
 // USTENSILS
 
-const onCloseTagUstensils = () => {
+const onCloseModaleUstensils = () => {
     modalUstensil.setAttribute('aria-hidden', 'true')
     modalUstensil.style.display = 'none'
     btnUstensil.focus()
@@ -148,7 +148,7 @@ const onCloseTagUstensils = () => {
     resetInputTag()
     // mainApp.updateTagsList()                                                      // Recharger la liste complete de tag lors de la femeture de la modale tag  
 }
-closeUstensil.addEventListener('click', onCloseTagUstensils)
+closeUstensil.addEventListener('click', onCloseModaleUstensils)
 
 // Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
 
@@ -180,7 +180,6 @@ function resetInputTag() {
 
 
 
-
-
+//export { onCloseModaleIngredients, onCloseModaleAppliances, onCloseModaleUstensils }
 
 
