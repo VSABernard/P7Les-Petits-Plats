@@ -118,7 +118,7 @@ label {
 .tag-selected-section {
     height: 40px;
     width: 1260px;
-    margin: -10px 60px -20px;
+    margin: -20px 60px 10px;
     color: white;
     display: flex;
     flex-wrap: wrap;
@@ -177,7 +177,8 @@ label {
     gap: 50px;
     height: 60px;
     width: 1440px;
-    margin: 30px 60px;
+    margin: 0 60px 30px;
+    z-index: 2;
 }
 
 #btn-ingredient, #btn-appliance, #btn-ustensil {
@@ -325,7 +326,6 @@ label {
     line-height: 30px;
     color: #FFFFFF;
     cursor: pointer;
-    
 }
 
 #list-ingredient li:hover, #list-appliance li:hover, #list-ustensil li:hover {
@@ -342,7 +342,7 @@ label {
     gap: 60px;
     max-width: 1440px;
     margin: auto;
-    padding: 20px 120px 60px 60px;
+    padding: 40px 120px 60px 60px;
     border-radius: 5px;
 }
 

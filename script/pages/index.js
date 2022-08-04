@@ -134,7 +134,6 @@ class MainApp {
             this.$tagsSelectedWrapper.appendChild(
                 templatetagsSelected.createTagSelectedCard()
             )
-            
         } 
 
         // Un listener sur chaque tag selectionné pour pouvoir le fermer
@@ -151,6 +150,7 @@ class MainApp {
 
         this.displayRecipes(recipesFilteredByTag)                                                    // Afficher les recettes qui correspondent aux tags sélectionnés
         await this.updateTagsList(recipesFilteredByTag)                                              // Alimentation la liste des tags suite à une recherche par le tag
+        
     }
 
     /**
@@ -166,8 +166,10 @@ class MainApp {
                 this.deleteSelectedTags(type, value)
                 this.displaySelectedTags()
                 this.onSearchByTags()                                                           // Afficher les recettes selon le tag restant
+                
             })
         })
+
     }
 
     /**
@@ -347,8 +349,15 @@ class MainApp {
 
         // Rechercher les recettes qui correspondent aux tags sélectionnés
         this.onSearchByTags()     
-        
-    
+
+        /** 
+         * Envoyer un événement pour fermer la modale de tag ouverte avec dispatchEvent
+         * La méthode dispatchEvent() de EventTarget envoie un événement à l'objet, (de manière synchrone) 
+         * en appelant les EventListener concernés dans l'ordre approprié
+         * closeModale = nom personnalisé donné pour indiquer l'événement à executer
+        **/
+        const event = new Event('closeModale')
+        document.dispatchEvent(event)    
     }
 
     /**

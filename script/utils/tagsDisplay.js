@@ -1,4 +1,4 @@
-import { mainApp } from '../pages/index.js'
+// import { mainApp } from '../pages/index.js'
 
 
 // La mise en place du block de tags
@@ -152,18 +152,18 @@ closeUstensil.addEventListener('click', onCloseModaleUstensils)
 
 // Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
 
-// modalsSection.forEach(modal=> {
-//     // modal.addEventListener('blur', onBlurModal, true)
+// modalsSection.forEach(modal => {
+//     modal.addEventListener('blur', onBlurModal, true)
 // })
 
 // function onBlurModal(event) {
 //     console.log('blurModal :' + event.currentTarget.id)
 //     switch (event.currentTarget.id) {
-//     case 'modal-ingredient' : onCloseTagIngredients()
+//     case 'modal-ingredient' : onCloseModaleIngredients() 
 //         break
-//     case 'modal-appliance' : onCloseTagAppliances()
+//     case 'modal-appliance' : onCloseModaleAppliances()
 //         break
-//     case 'modal-ustensil' : onCloseTagUstensils()
+//     case 'modal-ustensil' : onCloseModaleUstensils()
 //         break
 //     }
 // }
@@ -175,4 +175,14 @@ function resetInputTag() {
         element.value = ''
     })
 }
+
+/**  
+ * Ajouter un listener pour écouter la demande de la fermeture de la modale lors de la séléction d'un tag
+ * closeModale = nom personalisé donné dans index.js
+**/
+document.addEventListener('closeModale', () =>  {
+    onCloseModaleIngredients()
+    onCloseModaleAppliances()
+    onCloseModaleUstensils()
+}, false)
 
