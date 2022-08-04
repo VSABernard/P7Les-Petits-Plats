@@ -36,7 +36,7 @@ class RecipeCard {
         let recipeCard = `
         <section class="recipe-card" role="dialog" aria-labelledby="dialog-recipe" 
         aria-describedby="dialog-recipe" aria-modal="true" aria-hidden="true"> 
-            <img class="recipe-photo" src='../public/assets/imgRecipe.svg' aria-modal="true" aria-hidden="true" alt="Recipe's image" title="${this._recipe.description}">
+            <img class="recipe-photo" src='public/assets/imgRecipe.svg' aria-modal="true" aria-hidden="true" alt="Recipe's image" title="${this._recipe.description}">
             <article class="details-recipe">
                 <header class="recipe-header">
                     <div class="recipe-title">${this._recipe.name}</div>

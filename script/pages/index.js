@@ -134,6 +134,7 @@ class MainApp {
             this.$tagsSelectedWrapper.appendChild(
                 templatetagsSelected.createTagSelectedCard()
             )
+            
         } 
 
         // Un listener sur chaque tag selectionné pour pouvoir le fermer
@@ -319,9 +320,26 @@ class MainApp {
         } )
     }
 
-    // La méthode qui AJOUTE UN TAG au tableau des tags selectionnés
+    /** La méthode qui AJOUTE UN TAG au tableau des tags selectionnés
+     * @param type type du tag (ex.ingredient)
+     * @param value valeur du tag (ex.banane)
+    */
 
     addSelectedTag(type, value){
+        let tabSelectedExist = this.$tabTagsSelected.filter((tagSelected) => {
+            if ((tagSelected.type.toLowerCase().indexOf(type.toLowerCase()) > -1 ) && (tagSelected.value.toLowerCase().indexOf(value.toLowerCase()) > -1 )){
+                return true
+            } else {
+                return false
+            }
+        })
+
+        // Le tagSelected est déjà présent dans le tableau de tag sélectionné, inutile d'aller plus loin
+        if(tabSelectedExist.length > 0) {
+            return
+        }
+
+        // Ajouter le tag sélectetionné au tableau global
         this.$tabTagsSelected.push({type, value})
         
         // On rafraîchit la liste des tags sélectionnés
@@ -402,15 +420,6 @@ inputUstensil.addEventListener('keyup', function(event) {
     mainApp.onFilterTagByKeyword(event, 'ustensil')
     
 })
-
-
-
-
-
-
-
-
-
 
 
 
