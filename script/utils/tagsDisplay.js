@@ -176,10 +176,3 @@ function resetInputTag() {
     })
 }
 
-
-
-
-
-//export { onCloseModaleIngredients, onCloseModaleAppliances, onCloseModaleUstensils }
-
-

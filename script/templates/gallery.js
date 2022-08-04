@@ -33,7 +33,6 @@ class RecipeCard {
             ingredientCard += ` ${ingredient.quantity ? ingredient.quantity : ''} ${unit ? unit : ''}</li>`
         })
        
-
         let recipeCard = `
         <section class="recipe-card" role="dialog" aria-labelledby="dialog-recipe" 
         aria-describedby="dialog-recipe" aria-modal="true" aria-hidden="true"> 
