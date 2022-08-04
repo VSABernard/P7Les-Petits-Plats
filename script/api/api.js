@@ -21,16 +21,10 @@ class Api {
 
     async getRecipes() {
 
-        for(let recipe of recipes){
-            // console.log('recipe : ' + JSON.stringify(recipe))
-            // console.log('id : ' + recipe.id)
-            // console.log('name : ' + recipe.name)
-        }
-
-        recipes.map(({id, name}) => {
-            // console.log('id: ' + id)
-            // console.log('name: '+ name)
-        })
+        const comparatorAllRecipes = (a,b) => {                                                     // Trier la liste de recettes par l'ordre alphabetique
+            return a.name.localeCompare(b.name)                                                     // Ignorer les accents lors de tri
+        }    
+        recipes.sort(comparatorAllRecipes)
 
         return recipes
     }
