@@ -27,12 +27,7 @@ class MainApp {
 
     async init() {
         // Appel des méthodes de l'Api
-        // await this.api.getTotalReceipes()
-        // await this.api.getRecipes()
-        // await this.api.getIngredients()
-        // await this.api.getAppliances()
-        // await this.api.getUstensils()
-
+        
         await this.api.getRecipesByKeywordAlgo('')
 
         this.$recipesAll = await this.api.getRecipes()
@@ -148,8 +143,7 @@ class MainApp {
         recipesFilteredByTag = await this.api.getRecipesByTagSelectedAlgo(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
 
         this.displayRecipes(recipesFilteredByTag)                                                    // Afficher les recettes qui correspondent aux tags sélectionnés
-        await this.updateTagsList(recipesFilteredByTag)                                              // Alimentation la liste des tags suite à une recherche par le tag
-        
+        await this.updateTagsList(recipesFilteredByTag)                                              // Alimentation la liste des tags suite à une recherche par le tag        
     }
 
     /**
@@ -164,11 +158,9 @@ class MainApp {
                 let value = event.currentTarget.getAttribute('data-value')
                 this.deleteSelectedTags(type, value)
                 this.displaySelectedTags()
-                this.onSearchByTags()                                                           // Afficher les recettes selon le tag restant
-                
+                this.onSearchByTags()                                                           // Afficher les recettes selon le tag restant                
             })
         })
-
     }
 
     /**
@@ -288,8 +280,7 @@ class MainApp {
                 console.log('tag ingredient :' + event.target.innerHTML)
                 mainApp.addSelectedTag('ingredient', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
                 event.stopPropagation()                           
-            },true)
-            
+            },true)            
         } )
     }
 
@@ -428,7 +419,5 @@ inputUstensil.addEventListener('keyup', function(event) {
     mainApp.onFilterTagByKeyword(event, 'ustensil')
     
 })
-
-
 
 export { MainApp, mainApp }

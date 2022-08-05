@@ -228,14 +228,13 @@ class Api {
                     ustensils.push(ustensil)
                 }
             }
-            ustensils.sort(comparatorUstensil)
-            console.log('ustensils :')
-            console.table(ustensils)
-
-            return ustensils
         }
+        ustensils.sort(comparatorUstensil)
+        console.log('ustensils :')
+        console.table(ustensils)
+
+        return ustensils
     }
 }
-
 
 export {Api}

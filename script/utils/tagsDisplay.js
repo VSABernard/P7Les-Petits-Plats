@@ -22,7 +22,6 @@ let widthBtnIngredient = 0
 let widthBtnAppliance = 0
 let widthBtnUstensil = 0
 
-
 /**
 * OUVERTURE du block de la liste de tags : ingredients, appareils, ustensiles
 * Si une modale est ouverte, les deux autres modales sont fermées automatiquement
@@ -148,24 +147,6 @@ const onCloseModaleUstensils = () => {
     // mainApp.updateTagsList()                                                      // Recharger la liste complete de tag lors de la femeture de la modale tag  
 }
 closeUstensil.addEventListener('click', onCloseModaleUstensils)
-
-// Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
-
-// modalsSection.forEach(modal => {
-//     modal.addEventListener('blur', onBlurModal, true)
-// })
-
-// function onBlurModal(event) {
-//     console.log('blurModal :' + event.currentTarget.id)
-//     switch (event.currentTarget.id) {
-//     case 'modal-ingredient' : onCloseModaleIngredients() 
-//         break
-//     case 'modal-appliance' : onCloseModaleAppliances()
-//         break
-//     case 'modal-ustensil' : onCloseModaleUstensils()
-//         break
-//     }
-// }
 
 // Function qui reset la valeur dans l'input une fois la modale de tag est fermée
 
