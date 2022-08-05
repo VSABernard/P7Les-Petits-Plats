@@ -2,7 +2,6 @@ import { SearchBanner } from '../templates/search.js'
 import { TagsCard, TagSelectedCard } from '../templates/tags.js'
 import { RecipeCard } from '../templates/gallery.js'
 import { Api } from '../api/api.js'
-//import { onCloseModaleIngredients } from '../utils/tagsDisplay.js'
 
 class MainApp {
 
@@ -34,7 +33,7 @@ class MainApp {
         // await this.api.getAppliances()
         // await this.api.getUstensils()
 
-        await this.api.getRecipesByKeyword('')
+        await this.api.getRecipesByKeywordAlgo('')
 
         this.$recipesAll = await this.api.getRecipes()
         this.displayRecipes(this.$recipesAll)
@@ -72,7 +71,7 @@ class MainApp {
         let keyword = search.value                                          // afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
 
         // Obtenir la liste de recette qui contiennent à un mot-clé dans le titre, les ingrédients et la déscription des recette
-        this.recipesFilteredByKeywords = await this.api.getRecipesByKeyword(keyword)
+        this.recipesFilteredByKeywords = await this.api.getRecipesByKeywordAlgo(keyword)
         console.timeEnd('search')
 
         await this.displayRecipes(this.recipesFilteredByKeywords)
@@ -146,7 +145,7 @@ class MainApp {
 
     async onSearchByTags() {
         let recipesFilteredByTag = []
-        recipesFilteredByTag = await this.api.getRecipesByTagSelected(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
+        recipesFilteredByTag = await this.api.getRecipesByTagSelectedAlgo(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
 
         this.displayRecipes(recipesFilteredByTag)                                                    // Afficher les recettes qui correspondent aux tags sélectionnés
         await this.updateTagsList(recipesFilteredByTag)                                              // Alimentation la liste des tags suite à une recherche par le tag
@@ -198,15 +197,15 @@ class MainApp {
     */
 
     async updateTagsList(mapRecipes) {
-        let ingredients = await this.api.getIngredients(mapRecipes)
+        let ingredients = await this.api.getIngredientsAlgo(mapRecipes)
         this.$tagsCard.updateListIngredients(ingredients)           // afficher la totalité de liste
         this.addTagsIngredientListener()
 
-        let appliance = await this.api.getAppliances(mapRecipes)
+        let appliance = await this.api.getAppliancesAlgo(mapRecipes)
         this.$tagsCard.updateListAppliances(appliance)
         this.addTagsApplianceListener()
 
-        let ustensil = await this.api.getUstensils(mapRecipes)
+        let ustensil = await this.api.getUstensilsAlgo(mapRecipes)
         this.$tagsCard.updateListUstensils(ustensil)
         this.addTagsUstensilListener()
     }
@@ -221,9 +220,9 @@ class MainApp {
         let search = event.target       
         let length  = search.value.length
         let keyword = search.value
-        let ingredients = await this.api.getIngredients(this.$recipesAll)
-        let appliance = await this.api.getAppliances(this.$recipesAll)
-        let ustensil = await this.api.getUstensils(this.$recipesAll)
+        let ingredients = await this.api.getIngredientsAlgo(this.$recipesAll)
+        let appliance = await this.api.getAppliancesAlgo(this.$recipesAll)
+        let ustensil = await this.api.getUstensilsAlgo(this.$recipesAll)
 
         if (length < 3) {
             switch(type){

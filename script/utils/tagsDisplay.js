@@ -122,7 +122,6 @@ const onCloseModaleIngredients = () => {
     btnIngredient.focus()
     btnIngredient.style.width = (widthBtnIngredient - PADDING_BTN_TAG) +'px'        // Revenir à la taille d'origine du bouton lors de sa fermeture
     resetInputTag()
-    // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
 }
 closeIngredient.addEventListener('click', onCloseModaleIngredients)
 
