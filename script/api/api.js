@@ -281,7 +281,7 @@ class Api {
 
         for (let i = 0; i < mapTagLength; i++) {
             let tag = mapTags[i]
-            let recipesFiltered = []
+           
             switch(tag.type) {
             case 'ingredient' :                    
                 for (let i = 0; i < mapRecipesFilteredByTags.length; i++) {
