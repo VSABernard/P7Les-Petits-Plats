@@ -29,6 +29,10 @@ class Api {
         return recipes
     }
 
+    // ------------------------------------------------------------------------------
+    // Traiter les tableaux de données avec la METHODE DE L'OBJET ARRAY (FILTER, MAP)
+    // ------------------------------------------------------------------------------
+
     /**
      * Renvoyer la liste des recettes comportant le mot clé spécifique
      * La recherche se fait sur LA BARRE DE RECHERCHE PRINCIPALE selon le titre, les ingrédients, la description
@@ -39,10 +43,7 @@ class Api {
     async getRecipesByKeyword(keyword) {
 
         let recipesWithKeyword = []
-
-        // -------------------------------------------------------------------------
-        // Traiter les tableaux de données avec la méthode de l'objet array "FILTER"
-        // -------------------------------------------------------------------------
+        
         recipesWithKeyword = recipes.filter((recipe) => {
             const name = recipe.name
             const ingredients = recipe.ingredients
@@ -90,8 +91,8 @@ class Api {
 
         mapTags.map((tag) => {
 
-            console.log('mapTags :' + tag.value)
-            console.log('mapTags :' + tag.type)
+            // console.log('mapTags :' + tag.value)
+            // console.log('mapTags :' + tag.type)
 
             switch(tag.type) {
             case 'ingredient' :
@@ -138,7 +139,7 @@ class Api {
 
     /**
      * Renvoyer la liste des ingredients pour être affichée dans le block de tag
-     * @return tableau d'ingrédients
+     * @return tableau des ingrédients
      */
 
     async getIngredients(mapRecipes) {
@@ -164,7 +165,7 @@ class Api {
     
     /**
      * Renvoyer la liste des appareils pour être affichée dans le block de tag
-     * @return tableau d'appareils
+     * @return tableau des appareils
      */
 
     async getAppliances(mapRecipes) {
@@ -212,6 +213,100 @@ class Api {
 
         return ustensils
     }
+
+    // -------------------------------------------------------------------------
+    // Traiter les tableaux de données avec les BOUCLES NATIVES ( FOR )
+    // -------------------------------------------------------------------------
+
+    /**
+     * Renvoyer la liste des recettes comportant le mot clé spécifique
+     * La recherche se fait sur LA BARRE DE RECHERCHE PRINCIPALE selon le titre, les ingrédients, la description
+     * @param keyword : le mot clé
+     * @return liste des recettes
+     */
+    async getRecipesByKeywordAlgo(keyword) {
+        let recipesWithKeywordAlgo = []
+        const recipesLength = recipes.length
+
+        for(let i = 0; i < recipesLength; i++) {
+            
+            let recipe = recipes[i]
+            const name = recipe.name
+            const ingredients = recipe.ingredients
+            const description = recipe.description
+            const appliance = recipe.appliance
+            const ustensils = recipe.ustensils
+            const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
+            const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
+            const indexOnAppliance = appliance.toLowerCase().indexOf(keyword.toLowerCase())
+
+            // Récuperer les ingrédients contenant le mot clé avec la boucle "FOR"
+            const filterIngredients = []
+            for (let i = 0; i < ingredients.length; i++) {
+                let elem = ingredients[i]
+                if (elem.ingredient.toLowerCase().includes(keyword.toLowerCase())) {
+                    filterIngredients.push(elem)
+                }
+            }
+
+            // Récuperer les ustensils contenant le mot clé avec la boucle "FOR"
+            const filterUstensils = []
+            for (let i = 0; i < ustensils.length; i++) {
+                let elem = ustensils[i]
+                if (elem.ustensils.toLowerCase().includes(keyword.toLowerCase())) {
+                    filterUstensils.push(elem)
+                }
+            }
+
+            // Si l'index est différent de -1 alors le mot clé a été trouvé
+            if(indexOnName != -1 || filterIngredients.length > 0 || indexOnDescription != -1 || indexOnAppliance != -1 || filterUstensils.length > 0) {
+                recipesWithKeywordAlgo.push(recipe)
+            }
+        }
+
+        return recipesWithKeywordAlgo
+    }
+
+    /**
+     * Renvoyer la liste des recettes comportant le tag spécifique
+     * La recherche se fait avec DES TAGS selon les ingrédients, l'appareil et l'ustensile
+     * @param mapTags : la liste des tags sélectionnés
+     * @param mapRecipes : la liste des recettes 
+     * @return liste des recettes
+     */
+    async getRecipesByTagSelectedAlgo(mapTags, mapRecipes) {
+        let mapRecipesFilteredByTags = mapRecipes                           // La liste de recettes avant le traitement de filtrage sur le TAG
+
+        const mapTagLength = mapTags.length
+
+        for (let i = 0; i < mapTagLength; i++) {
+            let tag = mapTags[i]
+            let recipesFiltered = []
+            switch(tag.type) {
+            case 'ingredient' :                    
+                for (let i = 0; i < mapRecipesFilteredByTags.length; i++) {
+                    let recipe = mapRecipesFilteredByTags[i]
+                    for (let i = 0; i < recipe.ingredients.length; i++) {
+
+                        let elem = recipe.ingredients[i]
+                        let filterIngredients = []
+                        
+                        if (elem.ingredient.toLowerCase().includes(tag.value.toLowerCase())) {
+                            filterIngredients.push(elem)
+                        }
+
+                        if(filterIngredients.length > 0) {
+                            
+                        }
+                    } 
+
+                }
+
+            }
+        }
+
+    }
+
 }
 
 export {Api}
