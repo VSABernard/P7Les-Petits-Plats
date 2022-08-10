@@ -1,4 +1,5 @@
 import { recipes } from '../data/recipes.js'
+import { removeAccentFromString } from '../utils/utils.js'
 
 class Api {
     constructor() {
@@ -9,7 +10,7 @@ class Api {
      */
 
     async getTotalReceipes () {
-        console.log('total recipes:' + recipes.length)
+        // console.log('total recipes:' + recipes.length)
     }
 
     /**
@@ -38,30 +39,35 @@ class Api {
 
     async getRecipesByKeyword(keyword) {
 
+        // Retirer les accents du mot clé
+
+        keyword = removeAccentFromString(keyword)
+
         let recipesWithKeyword = []
 
         // -------------------------------------------------------------------------
         // Traiter les tableaux de données avec la méthode de l'objet array "FILTER"
         // -------------------------------------------------------------------------
         recipesWithKeyword = recipes.filter((recipe) => {
-            const name = recipe.name
+            const name = removeAccentFromString(recipe.name)
             const ingredients = recipe.ingredients
-            const description = recipe.description
-            const appliance = recipe.appliance
+            const description = removeAccentFromString(recipe.description)
+            const appliance = removeAccentFromString(recipe.appliance)
             const ustensils = recipe.ustensils
             const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
             const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
             const indexOnAppliance = appliance.toLowerCase().indexOf(keyword.toLowerCase())
 
-
             // Récuperer les ingrédients contenant le mot clé avec la méthode de l'objet array "FILTER"
             const filterIngredients = ingredients.filter(elem => {
-                return elem.ingredient.toLowerCase().includes(keyword.toLowerCase())                        //La méthode includes() permet de déterminer si un tableau contient une valeur et renvoie true si c'est le cas, false sinon.
+                let ingredientWithoutAccent = removeAccentFromString(elem.ingredient)                               // Retirer les accents dans le tableau des ingrédients
+                return ingredientWithoutAccent.toLowerCase().includes(keyword.toLowerCase())                        //La méthode includes() permet de déterminer si un tableau contient une valeur et renvoie true si c'est le cas, false sinon.
             })
 
             // Récuperer les ustensiles contenant le mot clé
             const filterUstensils = ustensils.filter(ustensils => {
-                return ustensils.toLowerCase().includes(keyword.toLowerCase())
+                let ustensilWithoutAccent = removeAccentFromString(ustensils)
+                return ustensilWithoutAccent.toLowerCase().includes(keyword.toLowerCase())
             })
 
             // Si l'index est différent de -1 alors le mot clé a été trouvé
@@ -70,7 +76,6 @@ class Api {
             } else {
                 return false
             }
-
         })
 
         return recipesWithKeyword
@@ -90,13 +95,13 @@ class Api {
 
         mapTags.map((tag) => {
 
-            console.log('mapTags :' + tag.value)
-            console.log('mapTags :' + tag.type)
+            // console.log('mapTags :' + tag.value)
+            // console.log('mapTags :' + tag.type)
 
             switch(tag.type) {
             case 'ingredient' :
                 mapRecipesFilteredByTags = mapRecipesFilteredByTags.filter(recipe => {
-                    const filterIngredients = recipe.ingredients.filter(elem => {
+                    const filterIngredients = recipe.ingredients.filter(elem => {                        
                         return elem.ingredient.toLowerCase().includes(tag.value.toLowerCase())
                     })
 
@@ -156,8 +161,8 @@ class Api {
         })
 
         ingredients.sort(comparatorIngredient)
-        console.log('ingredient :')
-        console.table(ingredients)
+        // console.log('ingredient :')
+        // console.table(ingredients)
 
         return ingredients
     }
@@ -177,12 +182,12 @@ class Api {
             if (!appliances.includes(recipe.appliance)) {
                 appliances.push(recipe.appliance)
             }
-            console.log('appliance: '+ recipe.appliance)
+            // console.log('appliance: '+ recipe.appliance)
         })
 
         appliances.sort(comparatorAppliance)
-        console.log('appliances :')
-        console.table(appliances)
+        // console.log('appliances :')
+        // console.table(appliances)
 
         return appliances
     }
@@ -207,8 +212,8 @@ class Api {
         })
 
         ustensils.sort(comparatorUstensil)
-        console.log('ustensils :')
-        console.table(ustensils)
+        // console.log('ustensils :')
+        // console.table(ustensils)
 
         return ustensils
     }

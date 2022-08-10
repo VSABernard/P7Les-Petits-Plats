@@ -1,6 +1,3 @@
-// import { mainApp } from '../pages/index.js'
-
-
 // La mise en place du block de tags
     
 // Padding à enlever lors de la fermeture des modals pour retrouver la taille d'origine des boutons
@@ -10,7 +7,6 @@ const PADDING_BTN_TAG = 17
 const btnIngredient = document.querySelector('#btn-ingredient')
 const btnAppliance = document.querySelector('#btn-appliance')
 const btnUstensil = document.querySelector('#btn-ustensil')
-// const modalsSection = document.querySelectorAll('.modal-section')
 const modalIngredient = document.querySelector('#modal-ingredient')
 const modalAppliance = document.querySelector('#modal-appliance')
 const modalUstensil = document.querySelector('#modal-ustensil')
@@ -21,7 +17,6 @@ const tagInput = document.querySelectorAll('.tag-input')
 let widthBtnIngredient = 0
 let widthBtnAppliance = 0
 let widthBtnUstensil = 0
-
 
 /**
 * OUVERTURE du block de la liste de tags : ingredients, appareils, ustensiles
@@ -53,7 +48,7 @@ const onOpenTagIngredients = () => {
 
     const sizeInfoModal = modalIngredient.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    console.log(widthModal +'px')
+    // console.log(widthModal +'px')
 
     /*
     ** On change la taille du bouton pour qu'il ait la même taille que la modale
@@ -87,7 +82,7 @@ const onOpenTagAppliances = () => {
 
     const sizeInfoModal = modalAppliance.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    console.log(widthModal +'px')
+    // console.log(widthModal +'px')
 
     // On change la taille du bouton pour qu'il ait la même taille que la modale
     // afin de décaler les boutons situé à droite
@@ -185,4 +180,3 @@ document.addEventListener('closeModale', () =>  {
     onCloseModaleAppliances()
     onCloseModaleUstensils()
 }, false)
-
