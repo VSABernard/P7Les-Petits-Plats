@@ -6,7 +6,6 @@ html {
   }
   
 body { 
-    /*  */
     width: 100%;
     max-width: 1440px;
     height: 100vh;
@@ -235,14 +234,26 @@ label {
     justify-content: space-between;
     border-radius: 5px;
     z-index: 1;
+    height: auto;
 }
 
 #modal-ingredient, #modal-ustensil, #modal-appliance {    
     margin-top: -70px;
     padding-top: 20px;
     max-height: 100%; 
-    width: 700px;
     border-radius: 5px; 
+}
+
+#modal-ingredient {
+    width: 700px;
+}
+
+#modal-appliance {
+    width: 430px;
+}
+
+#modal-ustensil {
+    width: 430px;
 }
 
 #modal-ingredient, #list-ingredient {  
@@ -300,30 +311,50 @@ label {
 
 .ul-tag { 
     position: absolute;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap; 
     margin-top: 40px;
     margin-left: 0;
     padding-left: 20px;
+    padding-bottom: 10px;
     z-index: 1;
 }
 
 #list-ingredient, #list-appliance, #list-ustensil {
-    width: 680px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); 
     border-radius: 5px;
+}
+
+.ul-tag#list-ingredient {
+    min-height: min-content;
+    max-height: 1320px; 
+    width: 680px;
+}
+
+.ul-tag#list-appliance {  
+    width: 410px;
+    border-radius: 5px;
+    min-height: min-content;
+}
+
+.ul-tag#list-ustensil {
+    height: min-content;
+    width: 410px;
 }
 
 #list-ingredient li, #list-appliance li, #list-ustensil li {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: 50px;    
+    width: 200px;
+    column-gap: 30px;
     list-style-type: none;
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 30px; 
     color: #FFFFFF;
     cursor: pointer;
 }
@@ -485,12 +516,3 @@ i {
     font-weight: 700;
     color: #ED6454;
 }
-
-/* MEDIA QUERIES  */
-/* 
-@media screen and (max-width: 1440px) {
-    .gallery-section {
-        gap: 30px;
-        width: 100%;
-    }
-} */

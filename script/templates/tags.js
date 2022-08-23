@@ -70,7 +70,7 @@ class TagsCard {
         ingredients.map((ingredient) => {
             let li = document.createElement('li')
             li.innerHTML = ingredient
-            listIngredient.appendChild(li)        
+            listIngredient.appendChild(li)       
         })
     }
 

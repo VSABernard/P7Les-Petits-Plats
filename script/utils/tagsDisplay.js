@@ -34,7 +34,7 @@ const onOpenTagIngredients = () => {
     onCloseModaleAppliances()
     onCloseModaleUstensils()
     closeIngredient.focus()
-
+    
     /*
     ** Obtenir les infos sur la taille du bouton sans passer par le CSS
     ** Element.getBoundingClientRect() retourne un objet DOMRect fournissant des informations 
@@ -48,7 +48,6 @@ const onOpenTagIngredients = () => {
 
     const sizeInfoModal = modalIngredient.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    // console.log(widthModal +'px')
 
     /*
     ** On change la taille du bouton pour qu'il ait la même taille que la modale
@@ -82,7 +81,6 @@ const onOpenTagAppliances = () => {
 
     const sizeInfoModal = modalAppliance.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    // console.log(widthModal +'px')
 
     // On change la taille du bouton pour qu'il ait la même taille que la modale
     // afin de décaler les boutons situé à droite
@@ -116,9 +114,7 @@ const onCloseModaleIngredients = () => {
     modalIngredient.style.display = 'none'    
     btnIngredient.focus()
     btnIngredient.style.width = (widthBtnIngredient - PADDING_BTN_TAG) +'px'        // Revenir à la taille d'origine du bouton lors de sa fermeture
-    resetInputTag()
-    // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
-}
+    resetInputTag()}
 closeIngredient.addEventListener('click', onCloseModaleIngredients)
 
 // APPAREILS
@@ -128,9 +124,7 @@ const onCloseModaleAppliances = () => {
     modalAppliance.style.display = 'none'
     btnAppliance.focus()
     btnAppliance.style.width = (widthBtnAppliance - PADDING_BTN_TAG) +'px'          // Revenir à la taille d'origine du bouton lors de sa fermeture
-    resetInputTag()
-    // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
-}
+    resetInputTag()}
 closeAppliance.addEventListener('click', onCloseModaleAppliances)
 
 // USTENSILS
@@ -140,28 +134,25 @@ const onCloseModaleUstensils = () => {
     modalUstensil.style.display = 'none'
     btnUstensil.focus()
     btnUstensil.style.width = (widthBtnUstensil - PADDING_BTN_TAG) +'px'          // Revenir à la taille d'origine du bouton lors de sa fermeture
-    resetInputTag()
-    // mainApp.updateTagsList()                                                      // Recharger la liste complete de tag lors de la femeture de la modale tag  
-}
+    resetInputTag()}
 closeUstensil.addEventListener('click', onCloseModaleUstensils)
 
-// Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
+/**
+ *  Evenement BLUR pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
+ *  Si on click en dehors de la modale, la modale se ferme
+*/ 
 
-// modalsSection.forEach(modal => {
-//     modal.addEventListener('blur', onBlurModal, true)
-// })
+window.addEventListener('click', onBlurModal)
 
-// function onBlurModal(event) {
-//     console.log('blurModal :' + event.currentTarget.id)
-//     switch (event.currentTarget.id) {
-//     case 'modal-ingredient' : onCloseModaleIngredients() 
-//         break
-//     case 'modal-appliance' : onCloseModaleAppliances()
-//         break
-//     case 'modal-ustensil' : onCloseModaleUstensils()
-//         break
-//     }
-// }
+function onBlurModal(event) {
+    //console.log('blurModal :' + event.currentTarget.id)
+    console.log('blurModal :' + event.target.id)
+    if(event.target.id === ''){
+        onCloseModaleIngredients() 
+        onCloseModaleAppliances()
+        onCloseModaleUstensils()
+    }
+}
 
 // Function qui reset la valeur dans l'input une fois la modale de tag est fermée
 

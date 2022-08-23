@@ -11,7 +11,7 @@ de l’utilisateur dans les recettes déjà reçues.
 L’utilisateur doit pouvoir filtrer les recettes selon deux axes :
 
     1. Une barre principale permettant de rechercher des mots ou groupes de lettres dans le titre, 
-      les ingrédients ou la description.
+       les ingrédients ou la description.
 
     2. Recherche par mots clés dans les ingrédients, les ustensiles ou les appareils.
 

@@ -6,14 +6,6 @@ class Api {
     }
 
     /**
-     * Obtenir le nombre de recettes
-     */
-
-    async getTotalReceipes () {
-        // console.log('total recipes:' + recipes.length)
-    }
-
-    /**
      * Renvoyer la liste des recettes
      * @param
      * @return liste des recettes
@@ -94,10 +86,6 @@ class Api {
         let mapRecipesFilteredByTags = mapRecipes                           // La liste de recettes avant le traitement de filtrage sur le TAG
 
         mapTags.map((tag) => {
-
-            // console.log('mapTags :' + tag.value)
-            // console.log('mapTags :' + tag.type)
-
             switch(tag.type) {
             case 'ingredient' :
                 mapRecipesFilteredByTags = mapRecipesFilteredByTags.filter(recipe => {
@@ -161,8 +149,6 @@ class Api {
         })
 
         ingredients.sort(comparatorIngredient)
-        // console.log('ingredient :')
-        // console.table(ingredients)
 
         return ingredients
     }
@@ -181,13 +167,9 @@ class Api {
         mapRecipes.map((recipe) => {
             if (!appliances.includes(recipe.appliance)) {
                 appliances.push(recipe.appliance)
-            }
-            // console.log('appliance: '+ recipe.appliance)
-        })
+            }})
 
         appliances.sort(comparatorAppliance)
-        // console.log('appliances :')
-        // console.table(appliances)
 
         return appliances
     }
@@ -212,9 +194,7 @@ class Api {
         })
 
         ustensils.sort(comparatorUstensil)
-        // console.log('ustensils :')
-        // console.table(ustensils)
-
+        
         return ustensils
     }
 }

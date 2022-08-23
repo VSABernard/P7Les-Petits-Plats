@@ -53,17 +53,14 @@ class MainApp {
         let search = event.target       
         let length  = search.value.length        
 
-        // console.log('recherche en cours :' + search.value)
-        // console.log('length :' + length)
         if (length < 3) { 
-            await this.displayRecipes(this.$recipesAll)                           // Afficher la totalité de liste de recettes s'il y a moins de 3 caractères
-            await this.updateTagsList(this.$recipesAll)                           // Remettre en totalité la liste des tags après une recherche sur la barre de recherche principale
-            return                                                                // Pas de recherche si la longeur est <3
+            await this.displayRecipes(this.$recipesAll)                      // Afficher la totalité de liste de recettes s'il y a moins de 3 caractères
+            await this.updateTagsList(this.$recipesAll)                      // Remettre en totalité la liste des tags après une recherche sur la barre de recherche principale
+            return                                                           // Pas de recherche si la longeur est <3
         }
-        // console.log('lancer la recherche!!!!')
-
+        
         console.time('search')                
-        let keyword = search.value                                          // afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
+        let keyword = search.value                                          // Afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
 
         // Obtenir la liste de recette qui contiennent à un mot-clé dans le titre, les ingrédients et la déscription des recette
         this.recipesFilteredByKeywords = await this.api.getRecipesByKeyword(keyword)
@@ -71,7 +68,7 @@ class MainApp {
 
         await this.displayRecipes(this.recipesFilteredByKeywords)
 
-        await this.updateTagsList(this.recipesFilteredByKeywords)                 // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
+        await this.updateTagsList(this.recipesFilteredByKeywords)           // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
     }
 
     /**
@@ -145,8 +142,8 @@ class MainApp {
         recipesFilteredByTag = await this.api.getRecipesByTagSelected(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
         console.timeEnd('search')
 
-        this.displayRecipes(recipesFilteredByTag)                                                    // Afficher les recettes qui correspondent aux tags sélectionnés
-        await this.updateTagsList(recipesFilteredByTag)                                              // Alimentation la liste des tags suite à une recherche par le tag
+        this.displayRecipes(recipesFilteredByTag)                                                // Afficher les recettes qui correspondent aux tags sélectionnés
+        await this.updateTagsList(recipesFilteredByTag)                                          // Alimentation la liste des tags suite à une recherche par le tag
     }
 
     /**
@@ -154,7 +151,6 @@ class MainApp {
     */ 
     async addSelectedTagListener() {
         const closeTagSelected = document.querySelectorAll('.close-tag-selected')
-        // const modaleTagSelected = document.querySelectorAll('.tag-li')
         closeTagSelected.forEach ((elem) => {
             elem.addEventListener('click', (event) => {
                 let type = event.currentTarget.getAttribute('data-type')
@@ -281,7 +277,6 @@ class MainApp {
 
         listTagsIngredient.forEach( function(elem) {
             elem.addEventListener('click', function(event) {
-                // console.log('tag ingredient :' + event.target.innerHTML)
                 mainApp.addSelectedTag('ingredient', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
                 event.stopPropagation()                           
             },true)            
@@ -295,7 +290,6 @@ class MainApp {
 
         listTagsAppliance.forEach( function(elem) {
             elem.addEventListener('click', function(event) {
-                // console.log('tag appliance :' + event.target.innerHTML)
                 mainApp.addSelectedTag('appliance', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
                 event.stopPropagation()                                                 
             },true)
@@ -309,7 +303,6 @@ class MainApp {
 
         listTagsUstensil.forEach( function(elem) {
             elem.addEventListener('click', function(event) {
-                // console.log('tag ustensil :' + event.target.innerHTML)
                 mainApp.addSelectedTag('ustensil', event.target.innerHTML)            // Ajouter le tag au tableau des tags selectionnés
                 event.stopPropagation()                                                 
             },true)
@@ -350,6 +343,7 @@ class MainApp {
          * en appelant les EventListener concernés dans l'ordre approprié
          * closeModale = nom personnalisé donné pour indiquer l'événement à executer
         **/
+
         const event = new Event('closeModale')
         document.dispatchEvent(event)    
     }
@@ -390,7 +384,6 @@ await mainApp.init()
 let searchInput = document.querySelector('#search-input')
 
 searchInput.addEventListener('keyup',function(event) {
-    // console.log('input search')
     mainApp.onSearchByKeyword(event)
 })
 
@@ -399,7 +392,6 @@ searchInput.addEventListener('keyup',function(event) {
 let inputIngredient = document.querySelector('#input-ingredient')
 
 inputIngredient.addEventListener('keyup', function(event) {
-    // console.log('input tag')
     mainApp.onFilterTagByKeyword(event, 'ingredient')
 })
 
@@ -408,7 +400,6 @@ inputIngredient.addEventListener('keyup', function(event) {
 let inputAppliance = document.querySelector('#input-appliance')
 
 inputAppliance.addEventListener('keyup', function(event) {
-    // console.log('input tag')
     mainApp.onFilterTagByKeyword(event, 'appliance')
 })
 
@@ -417,7 +408,6 @@ inputAppliance.addEventListener('keyup', function(event) {
 let inputUstensil = document.querySelector('#input-ustensil')
 
 inputUstensil.addEventListener('keyup', function(event) {
-    // console.log('input tag')
     mainApp.onFilterTagByKeyword(event, 'ustensil')    
 })
 
