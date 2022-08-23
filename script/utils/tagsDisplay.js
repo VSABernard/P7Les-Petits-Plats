@@ -10,7 +10,6 @@ const PADDING_BTN_TAG = 17
 const btnIngredient = document.querySelector('#btn-ingredient')
 const btnAppliance = document.querySelector('#btn-appliance')
 const btnUstensil = document.querySelector('#btn-ustensil')
-// const modalsSection = document.querySelectorAll('.modal-section')
 const modalIngredient = document.querySelector('#modal-ingredient')
 const modalAppliance = document.querySelector('#modal-appliance')
 const modalUstensil = document.querySelector('#modal-ustensil')
@@ -52,7 +51,6 @@ const onOpenTagIngredients = () => {
 
     const sizeInfoModal = modalIngredient.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    console.log(widthModal +'px')
 
     /*
     ** On change la taille du bouton pour qu'il ait la même taille que la modale
@@ -86,7 +84,6 @@ const onOpenTagAppliances = () => {
 
     const sizeInfoModal = modalAppliance.getBoundingClientRect()
     const widthModal = sizeInfoModal.width
-    console.log(widthModal +'px')
 
     // On change la taille du bouton pour qu'il ait la même taille que la modale
     // afin de décaler les boutons situé à droite
@@ -132,7 +129,6 @@ const onCloseModaleAppliances = () => {
     btnAppliance.focus()
     btnAppliance.style.width = (widthBtnAppliance - PADDING_BTN_TAG) +'px'          // Revenir à la taille d'origine du bouton lors de sa fermeture
     resetInputTag()
-    // mainApp.updateTagsList()                                                        // Recharger la liste complete de tag lors de la femeture de la modale tag
 }
 closeAppliance.addEventListener('click', onCloseModaleAppliances)
 
@@ -144,9 +140,22 @@ const onCloseModaleUstensils = () => {
     btnUstensil.focus()
     btnUstensil.style.width = (widthBtnUstensil - PADDING_BTN_TAG) +'px'          // Revenir à la taille d'origine du bouton lors de sa fermeture
     resetInputTag()
-    // mainApp.updateTagsList()                                                      // Recharger la liste complete de tag lors de la femeture de la modale tag  
 }
 closeUstensil.addEventListener('click', onCloseModaleUstensils)
+
+/**
+ *  Evenement pour fermer la modale de tag quand on clique à l'éxtérieur de la modale
+*/ 
+
+window.addEventListener('click', onBlurModal)
+
+function onBlurModal(event) {
+    if(event.target.id === ''){
+        onCloseModaleIngredients() 
+        onCloseModaleAppliances()
+        onCloseModaleUstensils()
+    }
+}
 
 // Function qui reset la valeur dans l'input une fois la modale de tag est fermée
 
