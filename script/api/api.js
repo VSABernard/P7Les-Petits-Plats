@@ -1,4 +1,5 @@
 import { recipes } from '../data/recipes.js'
+import { removeAccentFromString } from '../utils/utils.js'
 
 class Api {
     constructor() {
@@ -35,13 +36,17 @@ class Api {
         let recipesWithKeywordAlgo = []
         const recipesLength = recipes.length
 
+        // Retirer les accents du mot clé
+
+        keyword = removeAccentFromString(keyword)
+
         for(let i = 0; i < recipesLength; i++) {
             
             let recipe = recipes[i]
-            const name = recipe.name
+            const name = removeAccentFromString(recipe.name)
             const ingredients = recipe.ingredients
-            const description = recipe.description
-            const appliance = recipe.appliance
+            const description = removeAccentFromString(recipe.description)
+            const appliance = removeAccentFromString(recipe.appliance)
             const ustensils = recipe.ustensils
             const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
             const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
@@ -51,7 +56,7 @@ class Api {
             const filterIngredients = []
             for (let i = 0; i < ingredients.length; i++) {
                 let elem = ingredients[i]
-                if (elem.ingredient.toLowerCase().includes(keyword.toLowerCase())) {
+                if (removeAccentFromString(elem.ingredient).toLowerCase().includes(keyword.toLowerCase())) {
                     filterIngredients.push(elem)
                 }
             }
@@ -60,7 +65,7 @@ class Api {
             const filterUstensils = []
             for (let i = 0; i < ustensils.length; i++) {
                 let ustensil = ustensils[i]
-                if (ustensil.toLowerCase().includes(keyword.toLowerCase())) {
+                if (removeAccentFromString(ustensil).toLowerCase().includes(keyword.toLowerCase())) {
                     filterUstensils.push(ustensil)
                 }
             }
