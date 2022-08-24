@@ -8,15 +8,16 @@ html {
 body { 
     width: 100%;
     max-width: 1440px;
-    height: 100vh;
+    min-height: 100vh;
     font-family: "DM Sans", sans-serif;
     margin: auto;
 }
-header {
+header.header-logo {
     display: flex;
     justify-content: center;
     height: 100px;
-    margin-top: 30px;
+    max-width: 1440px;
+    margin: 20px auto -50px;
 }
 
 .logo {
@@ -43,26 +44,30 @@ main {
 
 .search-section {
     display: block;
-    height: 80px;
-    width: 100%;
-    margin: 30px auto;
+    height: 70px;
+    max-width: 1320px;
+    margin-top: 30px;
+    margin-left: 60px;
+    background-color: #E7E7E7;
 }
 
 .search-wrapper {
-    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 120px;
-    width: 100%;
+    justify-content: flex-start;
     margin: auto;
+    background-color: #E7E7E7;
+
 }
 
 .block-search {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 80px;
+    height: 70px;
+    max-width: 1280px;
+    background-color: #E7E7E7;
+    border-radius: 5px;
 }
 
 label {
@@ -70,29 +75,26 @@ label {
 }
 
 #search-input {
-    position: absolute;
     height: 69px;
-    width: 1240px;
+    max-width: 1200px;
     border-radius: 5px;
-    background-color: #E7E7E7;
+    background-color: transparent;
     font-size: 22px;
     color: #333;
     border: 0;
-    overflow: visible;
     outline: 0;
-    margin-left: 60px;
     padding-left: 20px;
 }
 
 .btn-search {
-    position: absolute;
+    position: inherit;
     background-color: #E7E7E7;
     height: 32px;
     width: 32px;
-    margin: auto 40px;
-    left: 1220px;
+    margin: auto 0;
+    /* left: 1220px;
     top: -35px;
-    bottom: 14.63%;
+    bottom: 14.63%; */
     color: #000000;
     border: 0;
     cursor: pointer;
@@ -370,6 +372,7 @@ label {
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: stretch;
     row-gap: 40px;
+    column-gap: 75px;
     max-width: 1440px;
     margin: auto;
     padding: 40px 60px;
