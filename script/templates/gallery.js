@@ -38,10 +38,10 @@ class RecipeCard {
         aria-describedby="dialog-recipe" aria-modal="true" aria-hidden="true"> 
             <img class="recipe-photo" src='public/assets/imgRecipe.svg' aria-modal="true" aria-hidden="true" alt="Recipe's image" title="${this._recipe.description}">
             <article class="details-recipe">
-                <header class="recipe-header">
+                <section class="recipe-header">
                     <div class="recipe-title">${this._recipe.name}</div>
                     <div class="recipe-timer"><i class="fa-regular fa-clock"></i>${this._recipe.time} min</div>    
-                </header>  
+                </section>  
                 <article class="recipe-infos">
                     <ul class="recipe-ingredients">
                     ${ingredientCard}

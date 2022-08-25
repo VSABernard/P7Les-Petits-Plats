@@ -59,12 +59,12 @@ class MainApp {
             return                                                           // Pas de recherche si la longeur est <3
         }
         
-        console.time('search')                
+        console.time('Execution Time')                
         let keyword = search.value                                          // Afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
 
         // Obtenir la liste de recette qui contiennent à un mot-clé dans le titre, les ingrédients et la déscription des recette
         this.recipesFilteredByKeywords = await this.api.getRecipesByKeyword(keyword)
-        console.timeEnd('search')
+        console.timeEnd('Execution Time')
 
         await this.displayRecipes(this.recipesFilteredByKeywords)
 
@@ -138,9 +138,9 @@ class MainApp {
     async onSearchByTags() {
         let recipesFilteredByTag = []
         
-        console.time('search')
+        console.time('Execution Time')
         recipesFilteredByTag = await this.api.getRecipesByTagSelected(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
-        console.timeEnd('search')
+        console.timeEnd('Execution Time')
 
         this.displayRecipes(recipesFilteredByTag)                                                // Afficher les recettes qui correspondent aux tags sélectionnés
         await this.updateTagsList(recipesFilteredByTag)                                          // Alimentation la liste des tags suite à une recherche par le tag
@@ -178,8 +178,6 @@ class MainApp {
                 return true
             }
         })
-
-        console.table(this.$tabTagsSelected)
     }
 
     /**
