@@ -1,37 +1,38 @@
 html {
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    height: 100%; 
-    width: 100%;
-}
-  
-body { 
-    width: 100%;
-    height: 100%;
-    font-family: "DM Sans", sans-serif;    
     display: flex;
-    justify-content: center;
-}
-
-header.header-logo {
-    position: fixed;
-    display: block;
+    flex-flow: row nowrap;  
     justify-content: center;
     align-content: center;
     align-items: center;
-    height: 100px;
+    height:100%;
     width: 100%;
-    max-width: 1300px;
-    margin: 40px auto 0;
-    left: 46.5%;
-    right: 45%;
+    margin: 0;
+    padding: 0;
+}
+  
+body { 
+    flex: 0 1 auto;
+    margin: 0;
+    align-self: auto;
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    font-family: "DM Sans", sans-serif; 
 }
 
-.logo {
-    position: relative;
+header.header-logo {
+    height: 100px;
+    width: 100%;
+    min-width: 1440px;
+    margin: 40px 0 0;
+}
+
+img.logo {
+    display: block;
     height: 90.29px;
     width: 268px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo:hover {
@@ -43,8 +44,8 @@ main {
     min-height: 100%;
     width: 100%;
     max-width: 1400px;
-    margin: 160px auto 0; 
-    padding-left: 80px;
+    margin: 40px auto 0; 
+    padding-left: 50px;
 }
 
 /*  LA BARRE DE RECHERCHE */
@@ -90,10 +91,6 @@ label {
     color: #333;
     border: 0;
     outline: 0;
-    padding-left: 20px;
-}
-
-#search-input::placeholder {
     padding-left: 20px;
 }
 
@@ -541,24 +538,9 @@ i {
 
 /* MEDIA QUERIES */
 
-@media (max-width: 2560px) {
-    header.header-logo {
-        left: 45%;
-    }
-} 
-
-@media (max-width: 1440px) {
-    header.header-logo {
-        left: 40%;
-    }
-    main {
-        padding-left: 70px;
-    }
-}
-
 @media (max-width: 350px) {
     main {
-        padding-left: 60px;
+        padding-left: 20px;
     }
     .block-search {
         width: 1180px;

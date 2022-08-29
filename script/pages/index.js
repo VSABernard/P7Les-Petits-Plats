@@ -49,8 +49,15 @@ class MainApp {
 
     async onSearchByKeyword(event){
 
-        //this fait référence a search input
-        let search = event.target       
+        let search = null
+
+        // Dans le cas où le parametre "event" est absent
+        if(event != null) {
+            search = event.target   
+        } else {
+            search = document.querySelector('#search-input')
+        }
+        //this fait référence a search input               
         let length  = search.value.length        
 
         if (length < 3) { 
@@ -157,7 +164,12 @@ class MainApp {
                 let value = event.currentTarget.getAttribute('data-value')
                 this.deleteSelectedTags(type, value)
                 this.displaySelectedTags()
-                this.onSearchByTags()                                                           // Afficher les recettes selon le tag restant                
+                if ( this.$tabTagsSelected.length > 0 ) {
+                    this.onSearchByTags()                                    // Afficher les recettes selon le tag restant     
+                } else {
+                    this.onSearchByKeyword()                                // Si la recherche avec le mot-clé est déclencée avant celle par tag, re-afficher les recettes selon le mot-clé si le dernier tag est effacé
+                }
+                           
             })
         })
     }

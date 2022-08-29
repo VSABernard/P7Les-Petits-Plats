@@ -145,8 +145,6 @@ closeUstensil.addEventListener('click', onCloseModaleUstensils)
 window.addEventListener('click', onBlurModal)
 
 function onBlurModal(event) {
-    //console.log('blurModal :' + event.currentTarget.id)
-    console.log('blurModal :' + event.target.id)
     if(event.target.id === ''){
         onCloseModaleIngredients() 
         onCloseModaleAppliances()
