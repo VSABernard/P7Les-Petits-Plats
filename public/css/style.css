@@ -111,7 +111,7 @@ label {
     height: 50px;
     font-size: 20px;
     font-weight: 600;
-    color: #ED6454;
+    color: transparent;
     font-size: 15px;
     text-align: left;
     overflow: hidden;
@@ -217,7 +217,7 @@ label {
     background-color: #68D9A4;
 }
 
-#btn-ustensil, .tag-li.ustensil  {
+#btn-ustensil, .tag-li.ustensil {
     background-color: #ED6454;
 }
 
@@ -525,6 +525,9 @@ i {
 .block-error {
     display: none;
     justify-content: center;
+    max-width: 1300px;
+    margin-top: 80px;
+    margin-left: 0;
 }
 
 .block-error p {
