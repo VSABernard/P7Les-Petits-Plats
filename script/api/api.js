@@ -94,12 +94,12 @@ class Api {
         **/
 
         let mapRecipesFilteredByTags = mapRecipes                           // La liste de recettes avant le traitement de filtrage sur le TAG
-        let tempRecipesFound = mapRecipes
+        let timeRecipesFound = mapRecipes
         
         for (let i = 0; i < mapTags.length; i++) {
             let tag = mapTags[i]
-            mapRecipesFilteredByTags = tempRecipesFound
-            tempRecipesFound = []                                           // Remise à vide du tableau temporaire
+            mapRecipesFilteredByTags = timeRecipesFound
+            timeRecipesFound = []                                           // Remise à vide du tableau temporaire
 
             switch(tag.type) {
             case 'ingredient' :                    
@@ -115,7 +115,7 @@ class Api {
                         }
 
                         if(filterIngredients.length > 0) {
-                            tempRecipesFound.push(recipe) 
+                            timeRecipesFound.push(recipe) 
                         }
                     } 
                 }
@@ -125,7 +125,7 @@ class Api {
                     let recipe = mapRecipesFilteredByTags[i]
                                             
                     if (recipe.appliance.toLowerCase().includes(tag.value.toLowerCase())) {
-                        tempRecipesFound.push(recipe) 
+                        timeRecipesFound.push(recipe) 
                     }
                 }
                 break
@@ -143,7 +143,7 @@ class Api {
                         }
 
                         if(filterUstensils.length > 0) {
-                            tempRecipesFound.push(recipe) 
+                            timeRecipesFound.push(recipe) 
                         }
                     }
                 }
@@ -151,7 +151,7 @@ class Api {
             } 
         }
 
-        mapRecipesFilteredByTags = tempRecipesFound
+        mapRecipesFilteredByTags = timeRecipesFound
         return mapRecipesFilteredByTags
     }
 
