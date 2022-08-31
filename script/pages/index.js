@@ -67,12 +67,12 @@ class MainApp {
             return                                                                // Pas de recherche si la longeur est <3
         }
         
-        console.time('search')                
+        console.time('Execution Time')                
         let keyword = search.value                                               // Afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
 
         // Obtenir la liste de recette qui contiennent à un mot-clé dans le titre, les ingrédients et la déscription des recette
         this.recipesFilteredByKeywords = await this.api.getRecipesByKeywordAlgo(keyword)
-        console.timeEnd('search')
+        console.timeEnd('Execution Time')
 
         await this.displayRecipes(this.recipesFilteredByKeywords)
 

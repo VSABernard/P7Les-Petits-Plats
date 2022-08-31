@@ -48,9 +48,27 @@ class Api {
             const description = removeAccentFromString(recipe.description)
             const appliance = removeAccentFromString(recipe.appliance)
             const ustensils = recipe.ustensils
+
+            // Récuperer les titres contenant le mot clé avec la boucle "FOR"
             const indexOnName = name.toLowerCase().indexOf(keyword.toLowerCase())
+            if (indexOnName != -1) {
+                recipesWithKeywordAlgo.push(recipe)
+                continue
+            }
+
+            // Récuperer les descriptions contenant le mot clé avec la boucle "FOR"
             const indexOnDescription = description.toLowerCase().indexOf(keyword.toLowerCase())
+            if (indexOnDescription != -1) {
+                recipesWithKeywordAlgo.push(recipe)
+                continue
+            }
+
+            // Récuperer les appareils contenant le mot clé avec la boucle "FOR"
             const indexOnAppliance = appliance.toLowerCase().indexOf(keyword.toLowerCase())
+            if (indexOnAppliance != -1) {
+                recipesWithKeywordAlgo.push(recipe)
+                continue
+            }
 
             // Récuperer les ingrédients contenant le mot clé avec la boucle "FOR"
             const filterIngredients = []
@@ -59,6 +77,10 @@ class Api {
                 if (removeAccentFromString(elem.ingredient).toLowerCase().includes(keyword.toLowerCase())) {
                     filterIngredients.push(elem)
                 }
+            }
+            if(filterIngredients.length > 0) {
+                recipesWithKeywordAlgo.push(recipe)
+                continue
             }
 
             // Récuperer les ustensils contenant le mot clé avec la boucle "FOR"
@@ -69,10 +91,9 @@ class Api {
                     filterUstensils.push(ustensil)
                 }
             }
-
-            // Si l'index est différent de -1 alors le mot clé a été trouvé
-            if(indexOnName != -1 || filterIngredients.length > 0 || indexOnDescription != -1 || indexOnAppliance != -1 || filterUstensils.length > 0) {
+            if(filterUstensils.length > 0) {
                 recipesWithKeywordAlgo.push(recipe)
+                continue
             }
         }
 
