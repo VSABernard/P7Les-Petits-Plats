@@ -189,7 +189,7 @@ class Api {
         }
 
         for (let i = 0; i < mapRecipes.length; i++) {
-            let recipe = recipes[i]
+            let recipe = mapRecipes[i]
             for (let i = 0; i < recipe.ingredients.length; i++) {
                 let elem = recipe.ingredients[i]
                 if (!ingredients.includes(elem.ingredient)) {                           
@@ -213,7 +213,7 @@ class Api {
         }
 
         for (let i = 0; i < mapRecipes.length; i++) {
-            let recipe = recipes[i]
+            let recipe = mapRecipes[i]
             if (!appliances.includes(recipe.appliance)) {
                 appliances.push(recipe.appliance)
             } 
@@ -235,7 +235,7 @@ class Api {
         }
 
         for (let i = 0; i < mapRecipes.length; i++) {
-            let recipe = recipes[i]
+            let recipe = mapRecipes[i]
             for (let i = 0; i < recipe.ustensils.length; i++) {
                 let ustensil = recipe.ustensils[i]
                 if (!ustensils.includes(ustensil)) {

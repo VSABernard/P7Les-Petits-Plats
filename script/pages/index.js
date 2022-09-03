@@ -50,6 +50,7 @@ class MainApp {
     async onSearchByKeyword(event){
 
         let search = null
+        this.$recipesFilteredByKeywords = []
 
         // Dans le cas où le parametre "event" est absent
         if(event != null) {
@@ -64,17 +65,18 @@ class MainApp {
         if (length < 3) { 
             await this.displayRecipes(this.$recipesAll)                           // Afficher la totalité de liste de recettes s'il y a moins de 3 caractères
             await this.updateTagsList(this.$recipesAll)                           // Remettre en totalité la liste des tags après une recherche sur la barre de recherche principale
+            await this.onSearchByTags()                                           // Rechercher les recettes par tag si des tags ont été selectionnés
             return                                                                // Pas de recherche si la longeur est <3
         }
         
         let keyword = search.value                                               // Afficher le nombre de millisecondes prises pour exécuter le code entre les appels de fonction
 
         // Obtenir la liste de recette qui contiennent à un mot-clé dans le titre, les ingrédients et la déscription des recette
-        this.recipesFilteredByKeywords = await this.api.getRecipesByKeywordAlgo(keyword)
+        this.$recipesFilteredByKeywords = await this.api.getRecipesByKeywordAlgo(keyword)
         
-        await this.displayRecipes(this.recipesFilteredByKeywords)
+        await this.displayRecipes(this.$recipesFilteredByKeywords)
 
-        await this.updateTagsList(this.recipesFilteredByKeywords)                 // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
+        await this.updateTagsList(this.$recipesFilteredByKeywords)                 // Alimentation la liste des tags suite à une recherche sur la barre de recherche principale
     }
 
     /**
@@ -144,8 +146,12 @@ class MainApp {
     async onSearchByTags() {
         let recipesFilteredByTag = []
 
-        recipesFilteredByTag = await this.api.getRecipesByTagSelectedAlgo(this.$tabTagsSelected, this.$recipesAll)    // Filtrer les recettes selon le tag sélectionné
-        
+        if(this.$recipesFilteredByKeywords.length == 0){
+            recipesFilteredByTag = await this.api.getRecipesByTagSelectedAlgo(this.$tabTagsSelected, this.$recipesAll)                  // Si aucun mot clé n'est cherché, il faut filtrer l'ensemble des recettes
+        } else {
+            recipesFilteredByTag = await this.api.getRecipesByTagSelectedAlgo(this.$tabTagsSelected, this.$recipesFilteredByKeywords)   // S'il un mot clé est cherché, il faut filter sur les recettes correspondantes au mot clé
+        }
+
         this.displayRecipes(recipesFilteredByTag)                                                 // Afficher les recettes qui correspondent aux tags sélectionnés
         await this.updateTagsList(recipesFilteredByTag)                                           // Alimentation la liste des tags suite à une recherche par le tag        
     }
@@ -233,7 +239,7 @@ class MainApp {
                 this.$tagsCard.updateListUstensils(ustensil)
                 break
             }                  
-            return                                                          // pas de recherche si la longeur est <3
+            return                                                          // Pas de recherche si la longeur est <3
         }
         
         // Filtrer la liste des tags aprés avoir sélectionné un tag spécifique
